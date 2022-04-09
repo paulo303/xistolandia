@@ -79,7 +79,13 @@ class FestaController extends Controller
      */
     public function show(Festa $festa)
     {
+        if (!$festa)
+            return redirect()->back()->withErrors('Não foi possível encontrar esta festa!');
 
+        return view('admin.pages.festas.show', [
+            'title' => "Detalhes",
+            'festa' => $festa,
+        ]);
     }
 
     /**
