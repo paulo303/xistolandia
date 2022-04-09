@@ -45,12 +45,13 @@ return [
     |
     */
 
-    'logo' => '&nbsp;<b>303</b> discos',
+    'logo' => '',
     'logo_img' => 'images/logo.png',
-    'logo_img_class' => 'brand-image-xs',
+    'logo_img_class' => 'brand-image-xs img-circle',
     'logo_img_xl' => 'images/logo.png',
-    'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'AdminLTE',
+    'logo_img_xl_class' => 'brand-image-xs img-circle',
+    'logo_img_alt' => 'Xistolândia',
+    'logo_img_xl_alt' => 'Xistolândia',
 
     /*
     |--------------------------------------------------------------------------

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('festas', function (Blueprint $table) {
             $table->id();
             $table->date('data');
-            $table->string('atracao')->nullable();
+            $table->string('atracoes')->nullable();
             $table->string('flyer')->nullable();
             $table->timestamps();
         });

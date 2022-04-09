@@ -8,8 +8,8 @@
             <div class="col-sm-12">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Usuários</a></li>
-                    <li class="breadcrumb-item active">Editar <strong>{{ $user->name}}</strong></li>
+                    <li class="breadcrumb-item"><a href="{{ route('festas.index') }}">Festas</a></li>
+                    <li class="breadcrumb-item active">Editar</li>
                 </ol>
             </div>
         </div>
@@ -17,9 +17,9 @@
 @stop
 
 @section('content')
-    <form action="{{ route('users.update', $user) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('festas.update', $festa) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        @include('admin.pages.users._partials.form')
+        @include('admin.pages.festas._partials.form')
     </form>
 @stop
