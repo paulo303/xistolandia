@@ -70,7 +70,7 @@
                             </td>
                             <td class="text-center" style="vertical-align: middle;" class="text-center">
                                 <a href="{{ route('festas.edit', $festa) }}" class="btn btn-outline-info">Editar</a>
-                                <a href="{{ route('festas.show', $festa) }}" class="btn btn-outline-warning">Informações</a>
+                                <a href="{{ route('festas.show', $festa) }}" class="btn btn-outline-warning">Detalhes</a>
                             </td>
                         </tr>
                     @empty
