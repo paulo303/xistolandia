@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label for="name">Data</label>
                     <input type="date" class="form-control" id="data" name="data" value="{{ $festa->data ?? old('data') }}" required>
@@ -12,18 +12,18 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="form-group">
-                    <label for="atracao">Atração</label>
-                    <input type="text" class="form-control" id="atracao" name="atracao" placeholder="Atração" value="{{ $festa->atracao ?? old('atracao') }}">
-                    @if ($errors->has('atracao'))
-                        <div class="error">{!! $errors->first('atracao') !!}</div>
+                    <label for="atracoes">Atrações</label>
+                    <input type="text" class="form-control" id="atracoes" name="atracoes" placeholder="Atração" value="{{ $festa->atracoes ?? old('atracoes') }}">
+                    @if ($errors->has('atracoes'))
+                        <div class="error">{!! $errors->first('atracoes') !!}</div>
                     @endif
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label for="flyer">Flyer</label>
                     <div class="input-group">

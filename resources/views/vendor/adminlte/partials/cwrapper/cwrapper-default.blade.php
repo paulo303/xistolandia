@@ -13,7 +13,7 @@
     @hasSection('content_header')
         <div class="text-center" style="background-color: #454d55">
             <a href="{{ route('dashboard') }}">
-                <img src="{{ url('images/logo.png') }}" width="200px" class="brand-image img-circle elevation-4 m-4" alt="">
+                <img src="{{ url('images/logo.png') }}" width="180" class="brand-image img-circle elevation-4 m-3" alt="">
             </a>
         </div>
         <div class="content-header">

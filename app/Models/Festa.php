@@ -2,10 +2,8 @@
 
 namespace App\Models;
 
-use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 
 class Festa extends Model
 {
@@ -17,12 +15,10 @@ class Festa extends Model
         'flyer',
     ];
 
-    public function getDataAttribute() {
-        return date('d/m/Y', strtotime($this->attributes['data']));
-    }
+    protected $appends = ['data_br'];
 
-    public function getCreatedAtAttribute() {
-        return date('d/m/Y H:i:s', strtotime($this->attributes['created_at']));
+    public function getDataBrAttribute() {
+        return date('d/m/Y', strtotime($this->attributes['data']));
     }
 
     /*** REGRAS DE NEGÓCIO ***/

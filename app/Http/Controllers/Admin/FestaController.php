@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateFestaRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class FestaController extends Controller
 {
@@ -78,7 +79,7 @@ class FestaController extends Controller
      */
     public function show(Festa $festa)
     {
-        //
+
     }
 
     /**
@@ -89,7 +90,13 @@ class FestaController extends Controller
      */
     public function edit(Festa $festa)
     {
-        //
+        if (!$festa)
+            return redirect()->back()->withErrors('Não foi possível encontrar esta festa!');
+
+        return view('admin.pages.festas.edit', [
+            'title' => "Editar Festa",
+            'festa' => $festa,
+        ]);
     }
 
     /**
@@ -101,7 +108,33 @@ class FestaController extends Controller
      */
     public function update(StoreUpdateFestaRequest $request, Festa $festa)
     {
-        //
+        if (!$festa)
+            return redirect()->back()->withErrors('Não foi possível encontrar esta festa!');
+
+        DB::beginTransaction();
+        try {
+            $dados = $request->all();
+
+            if ($request->flyer) {
+                if ($festa->image && Storage::exists($festa->image))
+                    Storage::delete($festa->image);
+
+                $path = 'images/flyers';
+                $upload = $request->flyer->move(public_path($path), $request->data . "." . $request->flyer->getClientOriginalExtension());
+                $dados['flyer'] = "{$path}/{$upload->getFilename()}";
+            }
+
+            $festa->update($dados);
+            DB::commit();
+
+            return redirect()->route('festas.index')->with('success', "Festa editada com sucesso!");
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
+
+
     }
 
     /**

@@ -24,12 +24,6 @@
                         <i class="fa fa-plus"></i> Nova Festa
                     </a>
                 </div>
-                {{-- <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6  right text-right">
-                    <form action="{{ route('festas.index') }}" method="get" class="form-inline" style="display: block;">
-                        <input type="text" name="search" id="search" placeholder="Nome" class="form-control" value="{{ $filters['search'] ?? '' }}">
-                        <button type="submit" class="btn btn-dark">Filtrar</button>
-                    </form>
-                </div> --}}
             </div>
         </div>
         <div class="card-body">
@@ -57,7 +51,7 @@
                                 @endif
                             </td>
                             <td class="text-center" style="vertical-align: middle;">
-                                {{ $festa->data }}
+                                {{ $festa->data_br }}
                             </td>
                             <td class="text-center" style="vertical-align: middle;">
                                 {{ $festa->atracoes }}
@@ -81,7 +75,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" align="center">Nenhum resultado encontrado</td>
+                            <td colspan="8" align="center">Nenhum resultado encontrado</td>
                         </tr>
                     @endforelse
                 </tbody>

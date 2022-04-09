@@ -20,7 +20,7 @@ class FestaSeeder extends Seeder
         Festa::create([
             'data'      => $date,
             'atracoes'   => 'Geezer e Isa Alkaline',
-            'flyer'     => "images/flyers/{$date}.jpeg",
+            'flyer'     => "images/flyers/{$date}.jpg",
         ]);
     }
 }
