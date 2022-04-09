@@ -8,8 +8,8 @@
             <div class="col-sm-12">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('labels.index') }}">Selos</a></li>
-                    <li class="breadcrumb-item active">Novo Selo</li>
+                    <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Usuários</a></li>
+                    <li class="breadcrumb-item active">Novo Usuário</li>
                 </ol>
             </div>
         </div>
@@ -17,8 +17,8 @@
 @stop
 
 @section('content')
-    <form action="{{ route('labels.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        @include('admin.pages.labels._partials.form')
+        @include('admin.pages.users._partials.form')
     </form>
 @stop
