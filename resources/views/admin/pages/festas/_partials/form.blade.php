@@ -1,37 +1,43 @@
 <div class="card">
     <div class="card-body">
-        <div class="form-group">
-            <label for="name">Nome</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Nome completo" value="{{ $user->name ?? old('name') }}">
-            @if ($errors->has('name'))
-                <div class="error">{!! $errors->first('name') !!}</div>
-            @endif
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="name">Data</label>
+                    <input type="date" class="form-control" id="data" name="data" value="{{ $festa->data ?? old('data') }}" required>
+                    @if ($errors->has('data'))
+                        <div class="error">{!! $errors->first('data') !!}</div>
+                    @endif
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="email">E-mail</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="email" value="{{ $user->email ?? old('email') }}">
-            @if ($errors->has('email'))
-                <div class="error">{!! $errors->first('email') !!}</div>
-            @endif
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="atracao">Atração</label>
+                    <input type="text" class="form-control" id="atracao" name="atracao" placeholder="Atração" value="{{ $festa->atracao ?? old('atracao') }}">
+                    @if ($errors->has('atracao'))
+                        <div class="error">{!! $errors->first('atracao') !!}</div>
+                    @endif
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Senha" value="">
-            @if ($errors->has('password'))
-                <div class="error">{!! $errors->first('password') !!}</div>
-            @endif
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="flyer">Flyer</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="flyer" name="flyer" value="{{ old('flyer') }}">
+                            <label class="custom-file-label" for="flyer">Escolher arquivo</label>
+                        </div>
+                    </div>
+                    @if ($errors->has('flyer'))
+                        <div class="error">{!! $errors->first('flyer') !!}</div>
+                    @endif
+                </div>
+            </div>
         </div>
-        {{-- <div class="form-group">
-            <label for="user_type_id">Tipo de usuário</label>
-            <select name="user_type_id" id="user_type_id" class="form-control">
-                @foreach ($userTypes as $userType)
-                    <option value="{{ $userType->id }}" @if (isset($user) && $userType->id == $user->user_type_id) selected @endif>{{ $userType->name }}</option>
-                @endforeach
-            </select>
-            @if ($errors->has('user_type_id'))
-                <div class="error">{!! $errors->first('user_type_id') !!}</div>
-            @endif
-        </div> --}}
     </div>
     <div class="card-footer">
         <button type="submit" class="btn btn-success">
