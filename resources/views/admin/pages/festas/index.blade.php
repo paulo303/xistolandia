@@ -57,16 +57,16 @@
                                 {{ $festa->atracoes }}
                             </td>
                             <td class="text-center" style="vertical-align: middle;">
-
+                                0
                             </td>
                             <td class="text-center" style="vertical-align: middle;">
-
+                                0
                             </td>
                             <td class="text-center" style="vertical-align: middle;">
-
+                                0
                             </td>
                             <td class="text-center" style="vertical-align: middle;">
-
+                                0
                             </td>
                             <td class="text-center" style="vertical-align: middle;" class="text-center">
                                 <a href="{{ route('festas.edit', $festa) }}" class="btn btn-outline-info">Editar</a>

@@ -42,10 +42,7 @@
                 @include('admin/includes/alerts/success')
             @endif
 
-
-
             @yield('content')
         </div>
     </div>
-
 </div>

@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('festas', function (Blueprint $table) {
+        Schema::create('convidados', function (Blueprint $table) {
             $table->id();
-            $table->date('data');
-            $table->string('atracoes')->nullable();
-            $table->string('flyer')->nullable();
+            $table->string('nome');
+            $table->string('email')->nullable();
+            $table->string('celular')->nullable();
+            $table->boolean('patrocinador')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('festas');
+        Schema::dropIfExists('convidados');
     }
 };
