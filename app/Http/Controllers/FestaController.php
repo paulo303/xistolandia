@@ -38,7 +38,7 @@ class FestaController extends Controller
     public function create()
     {
         return view('admin.pages.festas.create', [
-            'title' => 'Criar nova Festa',
+            'title' => 'Cadastrar nova Festa',
         ]);
     }
 
@@ -139,8 +139,6 @@ class FestaController extends Controller
             DB::rollBack();
             throw $th;
         }
-
-
     }
 
     /**

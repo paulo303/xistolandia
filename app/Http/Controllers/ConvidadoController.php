@@ -39,7 +39,7 @@ class ConvidadoController extends Controller
     public function create()
     {
         return view('admin.pages.convidados.create', [
-            'title' => 'Criar novo Convidado',
+            'title' => 'Cadastrar novo Convidado',
         ]);
     }
 
