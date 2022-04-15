@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\UserType;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\StoreUpdateUserRequest;
+use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -32,11 +31,10 @@ class UserController extends Controller
     {
         return view('admin.pages.users.create', [
             'title' => 'Criar novo Usuário',
-            'userTypes' => UserType::all(),
         ]);
     }
 
-    public function store(StoreUpdateUserRequest $request)
+    public function store(StoreUserRequest $request)
     {
         DB::beginTransaction();
         try {
@@ -70,11 +68,10 @@ class UserController extends Controller
         return view('admin.pages.users.edit', [
             'title' => $user->name,
             'user' => $user,
-            'userTypes' => UserType::all(),
         ]);
     }
 
-    public function update(StoreUpdateUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
         if (!$user)
             return redirect()->back()->withErrors('O usuário não foi encontrado!');

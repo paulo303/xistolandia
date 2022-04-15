@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             FestaSeeder::class,
             ConvidadoSeeder::class,
+            DjSeeder::class,
         ]);
     }
 }

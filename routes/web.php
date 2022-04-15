@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\{
+use App\Http\Controllers\{
     DashboardController,
     UserController,
     FestaController,
-    ConvidadoController
+    ConvidadoController,
+    DjController,
 };
 
 /*
@@ -25,14 +26,11 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
-
-    Route::prefix('admin')->group(function () {
-        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-        Route::resource('users', UserController::class);
-        Route::resource('festas', FestaController::class);
-        Route::resource('convidados', ConvidadoController::class);
-    });
-
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('users', UserController::class);
+    Route::resource('festas', FestaController::class);
+    Route::resource('convidados', ConvidadoController::class);
+    Route::resource('djs', DjController::class);
 });
 
 Auth::routes();

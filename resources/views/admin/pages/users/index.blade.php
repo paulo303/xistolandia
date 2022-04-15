@@ -38,7 +38,6 @@
                     <tr>
                         <th width="">Nome</th>
                         <th width="">E-mail</th>
-                        <th width="">Tipo de usuário</th>
                         <th class="text-center" width="200">Ações</th>
                     </tr>
                 </thead>
@@ -50,9 +49,6 @@
                             </td>
                             <td style="vertical-align: middle;">
                                 {{ $user->email }}
-                            </td>
-                            <td style="vertical-align: middle;">
-                                {{ $user->userType->name }}
                             </td>
                             <td style="vertical-align: middle;" class="text-center">
                                 <a href="{{ route('users.edit', $user->id) }}" class="btn btn-outline-info">Editar</a>
