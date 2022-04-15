@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Festa;
 use App\Http\Requests\Festa\StoreFestaRequest;
 use App\Http\Requests\Festa\UpdateFestaRequest;
+use App\Models\StatusConvidado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -12,11 +13,14 @@ use Illuminate\Support\Facades\Storage;
 class FestaController extends Controller
 {
     protected Festa $model;
+    protected StatusConvidado $statusConvidado;
 
-    public function __construct(Festa $festa)
+    public function __construct(Festa $festa, StatusConvidado $statusConvidado)
     {
         $this->model = $festa;
+        $this->statusConvidado = $statusConvidado;
     }
+
     /**
      * Display a listing of the resource.
      *
