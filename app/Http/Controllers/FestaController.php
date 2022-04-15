@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Models\Festa;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Festa\StoreFestaRequest;
 use App\Http\Requests\Festa\UpdateFestaRequest;
 use Illuminate\Http\Request;
@@ -39,7 +38,7 @@ class FestaController extends Controller
     public function create()
     {
         return view('admin.pages.festas.create', [
-            'title' => 'Criar nova Festa',
+            'title' => 'Cadastrar nova Festa',
         ]);
     }
 
@@ -140,8 +139,6 @@ class FestaController extends Controller
             DB::rollBack();
             throw $th;
         }
-
-
     }
 
     /**

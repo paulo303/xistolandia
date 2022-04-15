@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Models\Convidado;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Convidado\StoreConvidadoRequest;
 use App\Http\Requests\Convidado\UpdateConvidadoRequest;
 use Illuminate\Support\Facades\DB;
@@ -40,7 +39,7 @@ class ConvidadoController extends Controller
     public function create()
     {
         return view('admin.pages.convidados.create', [
-            'title' => 'Criar novo Convidado',
+            'title' => 'Cadastrar novo Convidado',
         ]);
     }
 
