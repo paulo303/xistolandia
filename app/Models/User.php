@@ -21,7 +21,6 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'user_type_id',
         'password',
     ];
 
@@ -44,16 +43,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function userType()
-    {
-        return $this->belongsTo(UserType::class);
-    }
-
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
-    }
-
     /*** REGRAS DE NEGÓCIO ***/
     public function getPaginate(string|null $search = '')
     {
@@ -66,21 +55,11 @@ class User extends Authenticatable
         ->orderBy('name', 'asc')
         ->paginate(10);
 
-        $users->load([
-            'userType',
-        ]);
-
         return $users;
     }
 
     public function findById($id)
     {
-        $user = $this->find($id);
-
-        $user->load([
-            'userType',
-        ]);
-
-        return $user;
+        return $this->find($id);
     }
 }
