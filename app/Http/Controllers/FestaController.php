@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Models\Festa;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Festa\StoreFestaRequest;
 use App\Http\Requests\Festa\UpdateFestaRequest;
 use Illuminate\Http\Request;

@@ -189,7 +189,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'admin/dashboard',
+    'dashboard_url' => 'dashboard',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -265,22 +265,22 @@ return [
         // ],
         [
             'text'  => 'Festas',
-            'url'   => 'admin/festas',
+            'url'   => 'festas',
             'icon'  => 'fas fa-store',
         ],
         [
             'text'  => 'Convidados',
-            'url'   => 'admin/convidados',
+            'url'   => 'convidados',
             'icon'  => 'fas fa-store',
         ],
         [
             'text'  => 'DJs',
-            'url'   => 'admin/djs',
+            'url'   => 'djs',
             'icon'  => 'fas fa-record-vinyl',
         ],
         [
             'text'  => 'Usuários',
-            'url'   => 'admin/users',
+            'url'   => 'users',
             'icon'  => 'fas fa-user',
         ],
         // [
