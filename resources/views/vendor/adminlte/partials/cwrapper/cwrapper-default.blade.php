@@ -11,11 +11,11 @@
 
     {{-- Content Header --}}
     @hasSection('content_header')
-        <div class="text-center" style="background-color: #454d55">
+        {{-- <div class="text-center" style="background-color: #454d55">
             <a href="{{ route('dashboard') }}">
-                <img src="{{ url('images/logo.png') }}" width="250px" alt="">
+                <img src="{{ url('images/logo.png') }}" width="150" class="brand-image img-circle elevation-4 m-3" alt="">
             </a>
-        </div>
+        </div> --}}
         <div class="content-header">
             <div class="{{ config('adminlte.classes_content_header') ?: $def_container_class }}">
                 @yield('content_header')
@@ -42,10 +42,7 @@
                 @include('admin/includes/alerts/success')
             @endif
 
-
-
             @yield('content')
         </div>
     </div>
-
 </div>

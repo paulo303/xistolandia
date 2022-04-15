@@ -5,9 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{
     DashboardController,
     UserController,
-    LabelController,
-    StoreController,
-    ReleaseController,
+    FestaController,
+    ConvidadoController
 };
 
 /*
@@ -30,6 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('users', UserController::class);
+        Route::resource('festas', FestaController::class);
+        Route::resource('convidados', ConvidadoController::class);
     });
 
 });

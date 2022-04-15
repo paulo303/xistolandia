@@ -8,7 +8,7 @@
             <div class="col-sm-12">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Usuários</li>
+                    <li class="breadcrumb-item active">Festas</li>
                 </ol>
             </div>
         </div>
@@ -20,15 +20,9 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <a href="{{ route('users.create') }}" class="btn btn-success">
-                        <i class="fa fa-plus"></i> Novo Usuário
+                    <a href="{{ route('festas.create') }}" class="btn btn-success">
+                        <i class="fa fa-plus"></i> Nova Festa
                     </a>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6  right text-right">
-                    <form action="{{ route('users.index') }}" method="get" class="form-inline" style="display: block;">
-                        <input type="text" name="search" id="search" placeholder="Nome" class="form-control" value="{{ $filters['search'] ?? '' }}">
-                        <button type="submit" class="btn btn-dark">Filtrar</button>
-                    </form>
                 </div>
             </div>
         </div>
@@ -36,43 +30,59 @@
             <table class="table table-condensed">
                 <thead>
                     <tr>
-                        <th width="">Nome</th>
-                        <th width="">E-mail</th>
-                        <th width="">Tipo de usuário</th>
-                        <th class="text-center" width="200">Ações</th>
+                        <th class="text-center">Flyer</th>
+                        <th class="text-center">Data</th>
+                        <th class="text-center">Atrações</th>
+                        <th class="text-center">Total</th>
+                        <th class="text-center">Convidados</th>
+                        <th class="text-center">Confirmados</th>
+                        <th class="text-center">Não irão</th>
+                        <th class="text-center" width="300">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($users as $user)
+                    @forelse ($festas as $festa)
                         <tr>
-                            <td style="vertical-align: middle;">
-                                {{ $user->name }}
+                            <td class="text-center" style="vertical-align: middle;">
+                                @if (isset($festa->flyer))
+                                    <a href="{{ url($festa->flyer) }}" target="_blank">
+                                        <img src="{{ url($festa->flyer) }}" width="150">
+                                    </a>
+                                @endif
                             </td>
-                            <td style="vertical-align: middle;">
-                                {{ $user->email }}
+                            <td class="text-center" style="vertical-align: middle;">
+                                {{ $festa->data_br }}
                             </td>
-                            <td style="vertical-align: middle;">
-                                {{ $user->userType->name }}
+                            <td class="text-center" style="vertical-align: middle;">
+                                {{ $festa->atracoes }}
                             </td>
-                            <td style="vertical-align: middle;" class="text-center">
-                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-outline-info">Editar</a>
+                            <td class="text-center" style="vertical-align: middle;">
+                                0
+                            </td>
+                            <td class="text-center" style="vertical-align: middle;">
+                                0
+                            </td>
+                            <td class="text-center" style="vertical-align: middle;">
+                                0
+                            </td>
+                            <td class="text-center" style="vertical-align: middle;">
+                                0
+                            </td>
+                            <td class="text-center" style="vertical-align: middle;" class="text-center">
+                                <a href="{{ route('festas.edit', $festa) }}" class="btn btn-outline-info">Editar</a>
+                                <a href="{{ route('festas.show', $festa) }}" class="btn btn-outline-warning">Detalhes</a>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" align="center">Nenhum resultado encontrado</td>
+                            <td colspan="8" align="center">Nenhum resultado encontrado</td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
         <div class="card-footer">
-            @if (isset($filters))
-                {{ $users->appends($filters)->links() }}
-            @else
-                {{ $users->links() }}
-            @endif
-
+            {{ $festas->links() }}
         </div>
     </div>
 @stop
