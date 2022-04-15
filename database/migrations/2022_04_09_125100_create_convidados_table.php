@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('celular')->nullable();
             $table->boolean('patrocinador')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

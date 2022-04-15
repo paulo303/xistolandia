@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('atracoes')->nullable();
             $table->string('flyer')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

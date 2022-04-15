@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Festa;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUpdateFestaRequest;
+use App\Http\Requests\Festa\StoreFestaRequest;
+use App\Http\Requests\Festa\UpdateFestaRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -48,7 +49,7 @@ class FestaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUpdateFestaRequest $request)
+    public function store(StoreFestaRequest $request)
     {
         DB::beginTransaction();
         try {
@@ -80,7 +81,7 @@ class FestaController extends Controller
     public function show(Festa $festa)
     {
         if (!$festa)
-            return redirect()->back()->withErrors('Não foi possível encontrar esta festa!');
+            return redirect()->back()->withErrors('Não foi possível encontrar a festa!');
 
         return view('admin.pages.festas.show', [
             'title' => "Detalhes",
@@ -97,7 +98,7 @@ class FestaController extends Controller
     public function edit(Festa $festa)
     {
         if (!$festa)
-            return redirect()->back()->withErrors('Não foi possível encontrar esta festa!');
+            return redirect()->back()->withErrors('Não foi possível encontrar a festa!');
 
         return view('admin.pages.festas.edit', [
             'title' => "Editar Festa",
@@ -112,10 +113,10 @@ class FestaController extends Controller
      * @param  \App\Models\Festa  $festa
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUpdateFestaRequest $request, Festa $festa)
+    public function update(UpdateFestaRequest $request, Festa $festa)
     {
         if (!$festa)
-            return redirect()->back()->withErrors('Não foi possível encontrar esta festa!');
+            return redirect()->back()->withErrors('Não foi possível encontrar a festa!');
 
         DB::beginTransaction();
         try {

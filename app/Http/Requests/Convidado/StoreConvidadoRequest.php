@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Convidado;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUpdateFestaRequest extends FormRequest
+class StoreConvidadoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,19 +24,22 @@ class StoreUpdateFestaRequest extends FormRequest
     public function rules()
     {
         return [
-            'data' => [
-                'required',
-                'date',
+            'nome' => [
+                'min:2',
+                'max:255',
             ],
-            'atracoes' => [
+            'email' => [
                 'nullable',
                 'min:2',
                 'max:255',
             ],
-            'flyer' => [
+            'celular' => [
                 'nullable',
-                'image',
-                'max:2048',
+                'min:10',
+                'max:30',
+            ],
+            'patrocinador' => [
+                'boolean',
             ],
         ];
     }
@@ -50,8 +53,8 @@ class StoreUpdateFestaRequest extends FormRequest
     {
         return [
             '*.required' => 'O campo <strong>:attribute</strong> é obrigatório!',
-            '*.min'      => 'O campo <strong>:attribute</strong> deve ter no mínimo 2 caracteres!',
-            '*.max'      => 'O campo <strong>:attribute</strong> deve ter no máximo 255 caracteres!',
+            '*.min'      => 'O campo <strong>:attribute</strong> deve ter no mínimo :min caracteres!',
+            '*.max'      => 'O campo <strong>:attribute</strong> deve ter no máximo :max caracteres!',
         ];
     }
 
@@ -63,9 +66,10 @@ class StoreUpdateFestaRequest extends FormRequest
     public function attributes()
     {
         return [
-            'data'    => 'Data',
-            'atracoes' => 'Atrações',
-            'flyer'   => 'Flyer',
+            'nome'    => 'Nome',
+            'email' => 'E-mail',
+            'celular'   => 'Celular',
+            'patrocinador'   => 'Patrocinador',
         ];
     }
 }

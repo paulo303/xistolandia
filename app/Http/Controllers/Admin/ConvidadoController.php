@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Convidado;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Convidado\StoreConvidadoRequest;
+use App\Http\Requests\Convidado\UpdateConvidadoRequest;
 use Illuminate\Support\Facades\DB;
 
 class ConvidadoController extends Controller
@@ -48,7 +50,7 @@ class ConvidadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreConvidadoRequest $request)
     {
         DB::beginTransaction();
         try {
@@ -83,7 +85,13 @@ class ConvidadoController extends Controller
      */
     public function edit(Convidado $convidado)
     {
-        //
+        if (!$convidado)
+            return redirect()->back()->withErrors('Não foi possível encontrar o convidado!');
+
+        return view('admin.pages.convidados.edit', [
+            'title' => "Editar convidado",
+            'convidado' => $convidado,
+        ]);
     }
 
     /**
@@ -93,9 +101,23 @@ class ConvidadoController extends Controller
      * @param  \App\Models\Convidado  $convidado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Convidado $convidado)
+    public function update(UpdateConvidadoRequest $request, Convidado $convidado)
     {
-        //
+        if (!$convidado)
+            return redirect()->back()->withErrors('Não foi possível encontrar o convidado!');
+
+        DB::beginTransaction();
+        try {
+            $convidado->update($request->toArray());
+            DB::commit();
+
+            $message = "Convidado <b>{$convidado->nome}</b> cadastrado com sucesso!";
+            return redirect()->route('convidados.index')->with('success', $message);
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 
     /**
