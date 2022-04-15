@@ -26,7 +26,7 @@ class StoreDjRequest extends FormRequest
         return [
             'nome' => [
                 'required',
-                'unique',
+                'unique:djs,nome',
                 'min:2',
                 'max:255',
             ],

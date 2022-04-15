@@ -15,7 +15,7 @@
             @endif
         </div>
         <div class="form-group">
-            <label for="password">Password</label>
+            <label for="password">Senha</label>
             <input type="password" class="form-control" id="password" name="password" placeholder="Senha" value="">
             @if ($errors->has('password'))
                 <div class="error">{!! $errors->first('password') !!}</div>
