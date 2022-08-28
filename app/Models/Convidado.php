@@ -27,8 +27,10 @@ class Convidado extends Model
     }
 
     /*** REGRAS DE NEGÓCIO ***/
-    public function getPaginate(string|null $search = '', string|null $patrocinadores = '')
+    public function getPaginate(string|null $search = '', string|null $patrocinadores = '', $perPage)
     {
+        $perPage = $perPage ? $perPage : 10;
+
         $convidados = $this->where(function ($query) use ($search, $patrocinadores){
             if ($patrocinadores) {
                 $query->where('patrocinador', 1);
@@ -39,7 +41,7 @@ class Convidado extends Model
             }
         })
         ->orderBy('nome', 'asc')
-        ->paginate(10);
+        ->paginate($perPage);
 
         // $convidados->load([
         //     // 'convidados',

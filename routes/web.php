@@ -25,8 +25,8 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::middleware('auth')->prefix('admin/')->group(function () {
+    Route::get('', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('users', UserController::class);
     Route::resource('festas', FestaController::class);
     Route::resource('convidados', ConvidadoController::class);

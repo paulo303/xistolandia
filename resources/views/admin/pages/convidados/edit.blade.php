@@ -3,17 +3,7 @@
 @section('title', $title)
 
 @section('content_header')
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-12">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('convidados.index') }}">Convidados</a></li>
-                    <li class="breadcrumb-item active">Editar <strong>{{ $convidado->nome}}</strong></li>
-                </ol>
-            </div>
-        </div>
-    </div>
+    @include('admin/_breadcrumb')
 @stop
 
 @section('content')

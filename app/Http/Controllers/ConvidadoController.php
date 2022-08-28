@@ -26,7 +26,7 @@ class ConvidadoController extends Controller
     {
         return view('admin.pages.convidados.index', [
             'title'  => 'Convidados',
-            'convidados' =>  $this->model->getPaginate($request->search, $request->patrocinadores),
+            'convidados' =>  $this->model->getPaginate($request->search, $request->patrocinadores, $request->perPage),
             'filters' => $request->all(),
         ]);
     }

@@ -15,6 +15,7 @@ class StatusConvidadoSeeder extends Seeder
      */
     public function run()
     {
+        StatusConvidado::create(['nome' => 'A ser convidado']);
         StatusConvidado::create(['nome' => 'Convidado']);
         StatusConvidado::create(['nome' => 'Confirmado']);
         StatusConvidado::create(['nome' => 'Não vai']);

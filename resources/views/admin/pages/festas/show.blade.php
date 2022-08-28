@@ -3,17 +3,7 @@
 @section('title', $title)
 
 @section('content_header')
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-12">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('festas.index') }}">Festas</a></li>
-                    <li class="breadcrumb-item active">Informações</li>
-                </ol>
-            </div>
-        </div>
-    </div>
+    @include('admin/_breadcrumb')
 @stop
 
 @section('content')
@@ -94,8 +84,9 @@
             </div>
         </div>
     </div>
-
+    <div class="col-md-12"><h1>Convidados</h1></div>
     <div class="card">
+
         <div class="card-header">
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
