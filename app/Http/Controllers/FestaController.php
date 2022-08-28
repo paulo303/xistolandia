@@ -28,9 +28,14 @@ class FestaController extends Controller
      */
     public function index()
     {
+        $caminhos = [
+            ['url' => '/admin/', 'titulo' => 'Dashboard'],
+            ['url' => '', 'titulo' => 'Festas'],
+        ];
         return view('admin.pages.festas.index', [
-            'title'  => 'Festas',
-            'festas' => $this->model->getPaginate(),
+            'title'    => 'Festas',
+            'festas'   => $this->model->getPaginate(),
+            'caminhos' => $caminhos,
         ]);
     }
 
@@ -41,8 +46,14 @@ class FestaController extends Controller
      */
     public function create()
     {
+        $caminhos = [
+            ['url' => '/admin/', 'titulo' => 'Dashboard'],
+            ['url' => '/admin/festas', 'titulo' => 'Festas'],
+            ['url' => '', 'titulo' => 'Nova festa'],
+        ];
         return view('admin.pages.festas.create', [
-            'title' => 'Cadastrar nova Festa',
+            'title'    => 'Cadastrar nova Festa',
+            'caminhos' => $caminhos,
         ]);
     }
 

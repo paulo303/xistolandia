@@ -15,7 +15,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="atracoes">Atrações</label>
-                    <input type="text" class="form-control" id="atracoes" name="atracoes" placeholder="Atração" value="{{ $festa->atracoes ?? old('atracoes') }}">
+                    <input type="text" class="form-control" id="atracoes" name="atracoes" placeholder="Atrações" value="{{ $festa->atracoes ?? old('atracoes') }}">
                     @if ($errors->has('atracoes'))
                         <div class="error">{!! $errors->first('atracoes') !!}</div>
                     @endif

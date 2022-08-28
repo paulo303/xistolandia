@@ -3,27 +3,20 @@
 @section('title', $title)
 
 @section('content_header')
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-12">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Festas</li>
-                </ol>
-            </div>
-        </div>
-    </div>
+    @include('admin/_breadcrumb')
 @stop
 
 @section('content')
     <div class="card">
         <div class="card-header">
             <div class="row">
+                @can('create', App\Festa::class)
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     <a href="{{ route('festas.create') }}" class="btn btn-success">
                         <i class="fa fa-plus"></i> Nova Festa
                     </a>
                 </div>
+                @endcan
             </div>
         </div>
         <div class="card-body">
@@ -69,8 +62,11 @@
                                 0
                             </td>
                             <td class="text-center" style="vertical-align: middle;" class="text-center">
+                                @can('update', $festa)
                                 <a href="{{ route('festas.edit', $festa) }}" class="btn btn-outline-info">Editar</a>
-                                <a href="{{ route('festas.show', $festa) }}" class="btn btn-outline-warning">Detalhes</a>
+                                @endcan
+                                <a href="{{ route('festas.show', $festa) }}" class="btn btn-outline-warning">Convidados</a>
+                                {{-- <a href="{{ route('festas.show', $festa) }}" class="btn btn-outline-warning">Line up</a> --}}
                             </td>
                         </tr>
                     @empty

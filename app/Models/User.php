@@ -62,4 +62,9 @@ class User extends Authenticatable
     {
         return $this->find($id);
     }
+
+    public function isAdministrator()
+    {
+        return $this->id == 1;
+    }
 }
