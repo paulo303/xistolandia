@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             ConvidadoSeeder::class,
             StatusConvidadoSeeder::class,
             DjSeeder::class,
+            FuncaoSeeder::class,
         ]);
     }
 }

@@ -43,6 +43,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function funcoes()
+    {
+        return $this->belongsToMany(Funcao::class);
+    }
+
     /*** REGRAS DE NEGÓCIO ***/
     public function getPaginate(string|null $search = '')
     {
@@ -53,6 +58,7 @@ class User extends Authenticatable
             }
         })
         ->orderBy('name', 'asc')
+        ->with(['funcoes'])
         ->paginate(10);
 
         return $users;
