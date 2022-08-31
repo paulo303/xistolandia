@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Festa;
+use App\Models\Funcao;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class FestaPolicy
+class FuncaoPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class FestaPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Festa  $festa
+     * @param  \App\Models\Funcao  $funcao
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Festa $festa)
+    public function view(User $user, Funcao $funcao)
     {
         //
     }
@@ -41,29 +41,29 @@ class FestaPolicy
      */
     public function create(User $user)
     {
-        return $user->id == 2;
+        //
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Festa  $festa
+     * @param  \App\Models\Funcao  $funcao
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Festa $festa)
+    public function update(User $user, Funcao $funcao)
     {
-        return $user->id == 2;
+        //
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Festa  $festa
+     * @param  \App\Models\Funcao  $funcao
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Festa $festa)
+    public function delete(User $user, Funcao $funcao)
     {
         //
     }
@@ -72,10 +72,10 @@ class FestaPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Festa  $festa
+     * @param  \App\Models\Funcao  $funcao
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Festa $festa)
+    public function restore(User $user, Funcao $funcao)
     {
         //
     }
@@ -84,10 +84,10 @@ class FestaPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Festa  $festa
+     * @param  \App\Models\Funcao  $funcao
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Festa $festa)
+    public function forceDelete(User $user, Funcao $funcao)
     {
         //
     }

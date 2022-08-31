@@ -120,4 +120,20 @@ class Helpers
     {
         return Helpers::clean(Helpers::removeAccents(strtolower($string)));
     }
+
+    public static function getModels(){
+        $path = app_path() . "/Models";
+        $models = [];
+        $results = scandir($path);
+        foreach ($results as $result) {
+            if ($result === '.' or $result === '..') continue;
+            $filename = $result;
+            if (is_dir($filename)) {
+                $models = array_merge($models, Helpers::getModels($filename));
+            }else{
+                $models[] = substr($filename,0,-4);
+            }
+        }
+        return $models;
+    }
 }

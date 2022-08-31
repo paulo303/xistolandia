@@ -29,7 +29,7 @@ class FestaController extends Controller
     public function index()
     {
         $caminhos = [
-            ['url' => '/admin/', 'titulo' => 'Dashboard'],
+            ['url' => '/admin', 'titulo' => 'Admin'],
             ['url' => '', 'titulo' => 'Festas'],
         ];
         return view('admin.pages.festas.index', [
@@ -47,7 +47,7 @@ class FestaController extends Controller
     public function create()
     {
         $caminhos = [
-            ['url' => '/admin/', 'titulo' => 'Dashboard'],
+            ['url' => '/admin', 'titulo' => 'Admin'],
             ['url' => '/admin/festas', 'titulo' => 'Festas'],
             ['url' => '', 'titulo' => 'Nova festa'],
         ];

@@ -283,6 +283,18 @@ return [
             'url'   => '/admin/users',
             'icon'  => 'fas fa-user',
         ],
+        [
+            'text'  => 'Funções',
+            'url'   => '/admin/funcoes',
+            'icon'  => 'fas fa-user',
+            'can'   => 'funcoes-ver',
+        ],
+        [
+            'text'  => 'Permissões',
+            'url'   => '/admin/permissoes',
+            'icon'  => 'fas fa-user',
+            'can'   => 'permissoes-ver',
+        ],
         // [
         //     'text'  => 'Features',
         //     'url'   => 'admin/features',

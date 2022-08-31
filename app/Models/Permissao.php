@@ -20,4 +20,24 @@ class Permissao extends Model
     {
         return $this->belongsToMany(Funcao::class);
     }
+
+    /*** REGRAS DE NEGÓCIO ***/
+    public function getPaginate(string|null $search = '')
+    {
+        $permissoes = $this->where(function ($query) use ($search){
+            if ($search) {
+                $query->where('nome', 'LIKE', "%{$search}%");
+            }
+        })
+        ->orderBy('nome', 'asc')
+        ->with(['funcoes'])
+        ->paginate(10);
+
+        return $permissoes;
+    }
+
+    public function findById($id)
+    {
+        return $this->with(['funcao'])->find($id);
+    }
 }

@@ -11,7 +11,7 @@
                         @endif
                     @endforeach
                 @else
-                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('index') }}">Admin</a></li>
                 @endif
             </ol>
         </div>

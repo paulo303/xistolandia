@@ -7,30 +7,45 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
+use App\Models\Funcao;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    protected User $user;
+    protected User $users;
 
-    public function __construct(User $user)
+    public function __construct(User $users)
     {
-        $this->model = $user;
+        $this->users = $users;
     }
 
     public function index(Request $request)
     {
+        $title = 'Usuários';
+        $caminhos = [
+            ['url' => '/admin', 'titulo' => 'Admin'],
+            ['url' => '',       'titulo' => $title],
+        ];
         return view('admin.pages.users.index', [
-            'title' => 'Usuários',
-            'users' => $this->model->getPaginate($request->search),
-            'filters' => $request->all(),
+            'title'    => $title,
+            'users'    => $this->users->getPaginate($request->search),
+            'filters'  => $request->all(),
+            'caminhos' => $caminhos,
         ]);
     }
 
     public function create()
     {
+        $title = 'Criar novo usuário';
+        $caminhos = [
+            ['url' => '/admin',       'titulo' => 'Admin'],
+            ['url' => '/admin/users', 'titulo' => 'Usuários'],
+            ['url' => '',             'titulo' => $title],
+        ];
         return view('admin.pages.users.create', [
-            'title' => 'Criar novo Usuário',
+            'title'    => $title,
+            'funcoes'  => Funcao::all(),
+            'caminhos' => $caminhos,
         ]);
     }
 
@@ -43,10 +58,10 @@ class UserController extends Controller
             if ($request->password)
                 $data['password'] = bcrypt($request->password);
 
-            $user = $this->model->create($data);
+            $user = $this->users->create($data);
             DB::commit();
 
-            $message = "Usuário <b>{$user->name}</b> cadastrado com sucesso!";
+            $message = "Usuário <b>{$user->name}</b> cadastrado!";
             return redirect()->route('users.index')->with('success', $message);
 
         } catch (\Throwable $th) {
@@ -62,19 +77,29 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        if (!$user = $this->model->findById($id))
+        if (!$user = $this->users->findById($id)){
             return redirect()->back()->withErrors('O usuário não foi encontrado!');
+        }
 
+        $title = 'Editar usuário';
+        $caminhos = [
+            ['url' => '/admin',       'titulo' => 'Admin'],
+            ['url' => '/admin/users', 'titulo' => 'Usuários'],
+            ['url' => '',             'titulo' => $title],
+        ];
         return view('admin.pages.users.edit', [
-            'title' => $user->name,
-            'user' => $user,
+            'title'    => $title,
+            'funcoes'  => Funcao::all(),
+            'user'     => $user,
+            'caminhos' => $caminhos,
         ]);
     }
 
     public function update(UpdateUserRequest $request, User $user)
     {
-        if (!$user)
+        if (!$user) {
             return redirect()->back()->withErrors('O usuário não foi encontrado!');
+        }
 
         DB::beginTransaction();
         try {
@@ -86,7 +111,7 @@ class UserController extends Controller
             $user->update($data);
             DB::commit();
 
-            $message = "<b>{$user->name}</b> editado com sucesso!";
+            $message = "<b>{$user->name}</b> editado!";
             return redirect()->route('users.index')->with('success', $message);
 
         } catch (\Throwable $th) {
@@ -98,5 +123,20 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function funcao($id)
+    {
+
+    }
+
+    public function funcaoStore($id)
+    {
+
+    }
+
+    public function funcaoDestroy($id)
+    {
+
     }
 }

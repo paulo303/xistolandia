@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\Permissao;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateUserRequest extends FormRequest
+class StorePermissaoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,21 +23,16 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
-        $id = $this->user->id ?? '';
-
         return [
-            'name' => [
+            'nome' => [
                 'required',
                 'string',
                 'min:3',
                 'max:255',
+                "unique:permissoes,nome",
             ],
-            'email' => [
-                'required',
-                'email',
-                "unique:users,email,{$id},id",
-            ],
-            'password' => [
+            'descricao' => [
+                'string',
                 'nullable',
                 'min:3',
                 'max:255',
@@ -68,9 +63,8 @@ class UpdateUserRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name'  => 'Nome',
-            'email' => 'E-mail',
-            'password' => 'Senha',
+            'nome'  => 'Nome',
+            'descricao' => 'Descrição',
         ];
     }
 }

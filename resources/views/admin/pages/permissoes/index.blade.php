@@ -12,12 +12,12 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 mb-3">
-                        <a href="{{ route('users.create') }}" class="btn btn-success">
-                            <i class="fa fa-plus"></i> Novo Usuário
+                        <a href="{{ route('permissoes.create') }}" class="btn btn-success">
+                            <i class="fa fa-plus"></i> Nova permissão
                         </a>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 right text-right">
-                        <form action="{{ route('users.index') }}" method="get" class="form-inline" style="display: block;">
+                        <form action="{{ route('permissoes.index') }}" method="get" class="form-inline" style="display: block;">
                             <input type="text" name="search" id="search" placeholder="Nome" class="form-control" value="{{ $filters['search'] ?? '' }}">
                             <button type="submit" class="btn btn-dark">Filtrar</button>
                         </form>
@@ -32,22 +32,21 @@
                         <tr>
                             <th width="">ID</th>
                             <th width="">Nome</th>
-                            <th width="">E-mail</th>
-                            <th width="">Função</th>
+                            <th width="">Descrição</th>
                             <th class="text-center" width="200">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @include('admin.pages.users._partials.table-lista-users')
+                        @include('admin.pages.permissoes._partials.table-lista-permissoes')
                     </tbody>
                 </table>
             </div>
         </div>
         <div class="card-footer">
             @if (isset($filters))
-                {{ $users->appends($filters)->links() }}
+                {{ $permissoes->appends($filters)->links() }}
             @else
-                {{ $users->links() }}
+                {{ $permissoes->links() }}
             @endif
 
         </div>

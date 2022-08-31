@@ -3,11 +3,13 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
-    DashboardController,
+    AdminController,
     UserController,
+    FuncaoController,
     FestaController,
     ConvidadoController,
     DjController,
+    PermissaoController,
 };
 
 /*
@@ -26,11 +28,23 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->prefix('admin/')->group(function () {
-    Route::get('', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('', [AdminController::class, 'index'])->name('index');
     Route::resource('users', UserController::class);
     Route::resource('festas', FestaController::class);
     Route::resource('convidados', ConvidadoController::class);
     Route::resource('djs', DjController::class);
+    Route::resource('funcoes', FuncaoController::class)->parameters([
+        'funcoes' => 'funcao'
+    ]);
+    Route::resource('permissoes', PermissaoController::class)->parameters([
+        'permissoes' => 'permissao'
+    ]);
+
+    Route::controller(UserController::class)->prefix('/users/funcao')->group(function () {
+        Route::get('/{id}', 'funcao')->name('users.funcao');
+        Route::post('/{id}', 'funcaoStore')->name('users.funcao.store');
+        Route::delete('/{id}', 'funcaoDestroy')->name('users.funcao.destroy');
+    });
 });
 
 Auth::routes();

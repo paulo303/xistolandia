@@ -2,19 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Permissao\StorePermissaoRequest;
+use App\Http\Requests\Permissao\UpdatePermissaoRequest;
 use App\Models\Permissao;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PermissaoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    protected Permissao $permissoes;
+
+    public function __construct(Permissao $permissoes)
     {
-        //
+        $this->permissoes = $permissoes;
+    }
+
+    public function index(Request $request)
+    {
+        $title = 'Permissões';
+        $caminhos = [
+            ['url' => '/admin', 'titulo' => 'Admin'],
+            ['url' => '',       'titulo' => $title],
+        ];
+        return view('admin.pages.permissoes.index', [
+            'title'      => $title,
+            'permissoes' => $this->permissoes->getPaginate($request->search),
+            'filters'    => $request->all(),
+            'caminhos'   => $caminhos,
+        ]);
     }
 
     /**
@@ -24,18 +39,40 @@ class PermissaoController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Criar nova permissão';
+        $caminhos = [
+            ['url' => '/admin',            'titulo' => 'Admin'],
+            ['url' => '/admin/permissoes', 'titulo' => 'Permissões'],
+            ['url' => '',                  'titulo' => $title],
+        ];
+        return view('admin.pages.permissoes.create', [
+            'title'    => $title,
+            'caminhos' => $caminhos,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StorePermissaoRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePermissaoRequest $request)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $data = $request->all();
+
+            $permissoes = $this->permissoes->create($data);
+            DB::commit();
+
+            $message = "Permissão cadastrada!";
+            return redirect()->route('permissoes.index')->with('success', $message);
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 
     /**
@@ -57,19 +94,50 @@ class PermissaoController extends Controller
      */
     public function edit(Permissao $permissao)
     {
-        //
+        if (!$permissao) {
+            return redirect()->back()->withErrors('A permissão não foi encontrada!');
+        }
+
+        $title = 'Editar permissão';
+        $caminhos = [
+            ['url' => '/admin',            'titulo' => 'Admin'],
+            ['url' => '/admin/permissoes', 'titulo' => 'Permissões'],
+            ['url' => '',                  'titulo' => $title],
+        ];
+        return view('admin.pages.permissoes.edit', [
+            'title'     => $title,
+            'permissao' => $permissao,
+            'caminhos'  => $caminhos,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\UpdatePermissaoRequest  $request
      * @param  \App\Models\Permissao  $permissao
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Permissao $permissao)
+    public function update(UpdatePermissaoRequest $request, Permissao $permissao)
     {
-        //
+        if (!$permissao) {
+            return redirect()->back()->withErrors('A permissão não foi encontrada!');
+        }
+
+        DB::beginTransaction();
+        try {
+            $data = $request->except('password');
+
+            $permissao->update($data);
+            DB::commit();
+
+            $message = "Permissão editada!";
+            return redirect()->route('permissoes.index')->with('success', $message);
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 
     /**

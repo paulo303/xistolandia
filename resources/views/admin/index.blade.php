@@ -3,7 +3,8 @@
 @section('title', $title)
 
 @section('content_header')
-    @include('admin/_breadcrumb')
+    &nbsp;
+    {{-- @include('admin/_breadcrumb') --}}
 @stop
 
 @section('content')

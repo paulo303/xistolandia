@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class AdminController extends Controller
 {
     /**
-     * Show the application dashboard.
+     * Show the application admin.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        return view('admin.dashboard', [
-            'title' => 'Dashboard',
+        dd(Helpers::getModels());
+        return view('admin.index', [
+            'title' => 'Admin',
         ]);
     }
 }

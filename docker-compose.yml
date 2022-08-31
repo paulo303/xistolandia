@@ -3,7 +3,7 @@ version: "3.7"
 services:
     # image project
     app:
-        container_name: xistolandia-laravel
+        container_name: app
         build:
             context: .
             dockerfile: Dockerfile
@@ -19,11 +19,11 @@ services:
 
     # nginx
     nginx:
-        container_name: xistolandia-nginx
+        container_name: nginx
         image: nginx:alpine
         restart: unless-stopped
         ports:
-            - "0909:80"
+            - "80:80"
         volumes:
             - ./:/var/www
             - ./docker/nginx/:/etc/nginx/conf.d/
@@ -32,7 +32,7 @@ services:
 
     # db mysql
     mysql:
-        container_name: xistolandia-mysql
+        container_name: mysql
         image: mysql:5.7.22
         restart: unless-stopped
         environment:
@@ -49,7 +49,7 @@ services:
 
     # queue
     queue:
-        container_name: xistolandia-queue
+        container_name: queue
         image: especializati/laravel-app
         restart: unless-stopped
         command: "php artisan queue:work"
@@ -63,7 +63,7 @@ services:
 
     # redis
     redis:
-        container_name: xistolandia-redis
+        container_name: redis
         image: redis:latest
         networks:
             - laravel

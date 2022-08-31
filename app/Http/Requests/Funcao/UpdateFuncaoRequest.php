@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\Funcao;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateUserRequest extends FormRequest
+class UpdateFuncaoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,21 +23,18 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
-        $id = $this->user->id ?? '';
+        $id = $this->funcao->id ?? '';
 
         return [
-            'name' => [
+            'nome' => [
                 'required',
+                "unique:funcoes,nome,{$id},id",
                 'string',
                 'min:3',
                 'max:255',
             ],
-            'email' => [
-                'required',
-                'email',
-                "unique:users,email,{$id},id",
-            ],
-            'password' => [
+            'descricao' => [
+                'string',
                 'nullable',
                 'min:3',
                 'max:255',
@@ -56,7 +53,7 @@ class UpdateUserRequest extends FormRequest
             '*.required' => 'O campo <strong>:attribute</strong> é obrigatório!',
             '*.min'      => 'O campo <strong>:attribute</strong> deve ter no mínimo :min caracteres!',
             '*.max'      => 'O campo <strong>:attribute</strong> deve ter no máximo :max caracteres!',
-            '*.unique'   => 'O <strong>:attribute</strong> já está sendo utilizado!',
+            '*.unique'   => '<strong>:attribute</strong> já está sendo utilizado!',
         ];
     }
 
@@ -68,9 +65,8 @@ class UpdateUserRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name'  => 'Nome',
-            'email' => 'E-mail',
-            'password' => 'Senha',
+            'nome'  => 'Nome',
+            'descricao' => 'Descrição',
         ];
     }
 }

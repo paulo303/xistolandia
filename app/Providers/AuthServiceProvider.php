@@ -14,6 +14,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Models\Festa' => 'App\Policies\FestaPolicy',
+        'App\Models\Funcao' => 'App\Policies\FuncaoPolicy',
+        'App\Models\Permissao' => 'App\Policies\PermissaoPolicy',
     ];
 
     /**
@@ -26,7 +28,15 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::before(function ($user) {
-            return $user->isAdministrator();
+            return $user->isAdmin();
+        });
+
+        Gate::define('funcoes-ver', function($user) {
+            return $user->isAdmin();
+        });
+
+        Gate::define('permissoes-ver', function($user) {
+            return $user->isAdmin();
         });
     }
 }
