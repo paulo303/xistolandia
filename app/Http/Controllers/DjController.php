@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\DB;
 
 class DjController extends Controller
 {
-    protected Dj $model;
+    protected Dj $dj;
 
     public function __construct(Dj $dj)
     {
-        $this->model = $dj;
+        $this->dj = $dj;
     }
     /**
      * Display a listing of the resource.
@@ -24,10 +24,16 @@ class DjController extends Controller
      */
     public function index(Request $request)
     {
+        $title = 'DJs';
+        $breadcrumb = [
+            ['url' => '/admin', 'titulo' => 'Admin'],
+            ['url' => '',       'titulo' => $title],
+        ];
         return view('admin.pages.djs.index', [
-            'title'  => 'DJs',
-            'djs' =>  $this->model->getPaginate($request->search),
-            'filters' => $request->all(),
+            'title'      => $title,
+            'djs'        => $this->dj->getPaginate($request->search),
+            'filters'    => $request->all(),
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 
@@ -38,8 +44,15 @@ class DjController extends Controller
      */
     public function create()
     {
+        $title = 'Novo DJ';
+        $breadcrumb = [
+            ['url' => '/admin',     'titulo' => 'Admin'],
+            ['url' => '/admin/djs', 'titulo' => 'DJs'],
+            ['url' => '',           'titulo' => $title],
+        ];
         return view('admin.pages.djs.create', [
-            'title' => 'Cadastrar novo DJ',
+            'title'      => $title,
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 
@@ -53,10 +66,10 @@ class DjController extends Controller
     {
         DB::beginTransaction();
         try {
-            $dj = $this->model->create($request->all());
+            $this->dj->create($request->all());
             DB::commit();
 
-            return redirect()->route('djs.index')->with('success', "DJ <b>{$dj->nome}</b> cadastrado com sucesso!");
+            return redirect()->route('djs.index')->with('success', "DJ cadastrado!");
 
         } catch (\Throwable $th) {
             DB::rollBack();
@@ -83,12 +96,20 @@ class DjController extends Controller
      */
     public function edit(Dj $dj)
     {
-        if (!$dj)
+        if (!$dj) {
             return redirect()->back()->withErrors('Não foi possível encontrar o DJ!');
+        }
 
+        $title = 'Editar DJ';
+        $breadcrumb = [
+            ['url' => '/admin',     'titulo' => 'Admin'],
+            ['url' => '/admin/djs', 'titulo' => 'DJs'],
+            ['url' => '',           'titulo' => $title],
+        ];
         return view('admin.pages.djs.edit', [
-            'title' => "Editar DJ",
-            'dj' => $dj,
+            'title'      => $title,
+            'dj'         => $dj,
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 
@@ -101,15 +122,16 @@ class DjController extends Controller
      */
     public function update(UpdateDjRequest $request, Dj $dj)
     {
-        if (!$dj)
+        if (!$dj) {
             return redirect()->back()->withErrors('Não foi possível encontrar a festa!');
+        }
 
         DB::beginTransaction();
         try {
             $dj->update($request->all());
             DB::commit();
 
-            return redirect()->route('djs.index')->with('success', "DJ <b>{$dj->nome}</b> editado com sucesso!");
+            return redirect()->route('djs.index')->with('success', "DJ editado!");
 
         } catch (\Throwable $th) {
             DB::rollBack();

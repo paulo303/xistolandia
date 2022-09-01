@@ -12,32 +12,32 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    protected User $users;
+    protected User $user;
 
-    public function __construct(User $users)
+    public function __construct(User $user)
     {
-        $this->users = $users;
+        $this->user = $user;
     }
 
     public function index(Request $request)
     {
         $title = 'Usuários';
-        $caminhos = [
+        $breadcrumb = [
             ['url' => '/admin', 'titulo' => 'Admin'],
             ['url' => '',       'titulo' => $title],
         ];
         return view('admin.pages.users.index', [
             'title'    => $title,
-            'users'    => $this->users->getPaginate($request->search),
+            'users'    => $this->user->getPaginate($request->search),
             'filters'  => $request->all(),
-            'caminhos' => $caminhos,
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 
     public function create()
     {
         $title = 'Criar novo usuário';
-        $caminhos = [
+        $breadcrumb = [
             ['url' => '/admin',       'titulo' => 'Admin'],
             ['url' => '/admin/users', 'titulo' => 'Usuários'],
             ['url' => '',             'titulo' => $title],
@@ -45,7 +45,7 @@ class UserController extends Controller
         return view('admin.pages.users.create', [
             'title'    => $title,
             'funcoes'  => Funcao::all(),
-            'caminhos' => $caminhos,
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 
@@ -55,14 +55,14 @@ class UserController extends Controller
         try {
             $data = $request->all();
 
-            if ($request->password)
+            if ($request->password) {
                 $data['password'] = bcrypt($request->password);
+            }
 
-            $user = $this->users->create($data);
+            $this->user->create($data);
             DB::commit();
 
-            $message = "Usuário <b>{$user->name}</b> cadastrado!";
-            return redirect()->route('users.index')->with('success', $message);
+            return redirect()->route('users.index')->with('success', 'Usuário cadastrado!');
 
         } catch (\Throwable $th) {
             DB::rollBack();
@@ -77,12 +77,12 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        if (!$user = $this->users->findById($id)){
+        if (!$user = $this->user->findById($id)) {
             return redirect()->back()->withErrors('O usuário não foi encontrado!');
         }
 
         $title = 'Editar usuário';
-        $caminhos = [
+        $breadcrumb = [
             ['url' => '/admin',       'titulo' => 'Admin'],
             ['url' => '/admin/users', 'titulo' => 'Usuários'],
             ['url' => '',             'titulo' => $title],
@@ -91,7 +91,7 @@ class UserController extends Controller
             'title'    => $title,
             'funcoes'  => Funcao::all(),
             'user'     => $user,
-            'caminhos' => $caminhos,
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 
@@ -105,14 +105,14 @@ class UserController extends Controller
         try {
             $data = $request->except('password');
 
-            if ($request->password)
+            if ($request->password) {
                 $data['password'] = bcrypt($request->password);
+            }
 
             $user->update($data);
             DB::commit();
 
-            $message = "<b>{$user->name}</b> editado!";
-            return redirect()->route('users.index')->with('success', $message);
+            return redirect()->route('users.index')->with('success', 'Usuário editado');
 
         } catch (\Throwable $th) {
             DB::rollBack();

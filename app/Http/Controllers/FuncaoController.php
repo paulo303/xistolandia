@@ -10,25 +10,25 @@ use Illuminate\Support\Facades\DB;
 
 class FuncaoController extends Controller
 {
-    protected Funcao $funcoes;
+    protected Funcao $funcao;
 
-    public function __construct(Funcao $funcoes)
+    public function __construct(Funcao $funcao)
     {
-        $this->funcoes = $funcoes;
+        $this->funcao = $funcao;
     }
 
     public function index(Request $request)
     {
         $title = 'Funções';
-        $caminhos = [
+        $breadcrumb = [
             ['url' => '/admin', 'titulo' => 'Admin'],
             ['url' => '',       'titulo' => $title],
         ];
 
         return view('admin.pages.funcoes.index', [
             'title'    => $title,
-            'funcoes'  => $this->funcoes->getPaginate($request->search),
-            'caminhos' => $caminhos,
+            'funcoes'  => $this->funcao->getPaginate($request->search),
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 
@@ -40,15 +40,15 @@ class FuncaoController extends Controller
     public function create()
     {
         $title = 'Editar função';
-        $caminhos = [
+        $breadcrumb = [
             ['url' => '/admin',         'titulo' => 'Admin'],
             ['url' => '/admin/funcoes', 'titulo' => 'Funções'],
             ['url' => '',               'titulo' => $title],
         ];
         return view('admin.pages.funcoes.create', [
             'title'    => $title,
-            'funcoes'  => $this->funcoes->getAll(),
-            'caminhos' => $caminhos,
+            'funcoes'  => $this->funcao->getAll(),
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 
@@ -64,11 +64,10 @@ class FuncaoController extends Controller
         try {
             $data = $request->all();
 
-            $funcao = $this->funcoes->create($data);
+            $this->funcao->create($data);
             DB::commit();
 
-            $message = "Função <b>{$funcao->nome}</b> cadastrado!";
-            return redirect()->route('funcoes.index')->with('success', $message);
+            return redirect()->route('funcoes.index')->with('success', 'Função cadastrada');
 
         } catch (\Throwable $th) {
             DB::rollBack();
@@ -100,7 +99,7 @@ class FuncaoController extends Controller
         }
 
         $title = 'Criar nova função';
-        $caminhos = [
+        $breadcrumb = [
             ['url' => '/admin',         'titulo' => 'Admin'],
             ['url' => '/admin/funcoes', 'titulo' => 'Funções'],
             ['url' => '',               'titulo' => $title],
@@ -108,7 +107,7 @@ class FuncaoController extends Controller
         return view('admin.pages.funcoes.edit', [
             'title'    => $title,
             'funcao'   => $funcao,
-            'caminhos' => $caminhos,
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 
@@ -121,7 +120,7 @@ class FuncaoController extends Controller
      */
     public function update(UpdateFuncaoRequest $request, Funcao $funcao)
     {
-        if (!$funcao){
+        if (!$funcao) {
             return redirect()->back()->withErrors('A função não foi encontrado!');
         }
 
@@ -130,8 +129,7 @@ class FuncaoController extends Controller
             $funcao->update($request->all());
             DB::commit();
 
-            $message = "Função editada!";
-            return redirect()->route('funcoes.index')->with('success', $message);
+            return redirect()->route('funcoes.index')->with('success', 'Função editada!');
 
         } catch (\Throwable $th) {
             DB::rollBack();
@@ -150,8 +148,9 @@ class FuncaoController extends Controller
         if (!$funcao) {
             return redirect()->back()->withErrors('A função não foi encontrado!');
         }
+
         $funcao->delete();
-        $message = "Função excluída!";
-        return redirect()->route('funcoes.index')->with('success', $message);
+
+        return redirect()->route('funcoes.index')->with('success', 'Função excluída!');
     }
 }

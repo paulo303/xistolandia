@@ -30,14 +30,20 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th width="">ID</th>
-                            <th width="">Nome</th>
-                            <th width="">Descrição</th>
-                            <th class="text-center" width="200">Ações</th>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">Nome</th>
+                            <th class="text-center">Descrição</th>
+                            <th class="text-center">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @include('admin.pages.permissoes._partials.table-lista-permissoes')
+                        @forelse ($permissoes as $permissao)
+                            @include('admin.pages.permissoes._partials.table-lista-permissoes')
+                        @empty
+                            <tr>
+                                <td colspan="4" class="text-center">Nenhum resultado encontrado</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

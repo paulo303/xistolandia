@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-sm-6 col-md-5 col-lg-4 col-xl-3">
                 <div class="form-group">
                     <label for="nome">Nome</label>
                     <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome artístico" value="{{ $dj->nome ?? old('nome') }}">

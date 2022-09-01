@@ -14,7 +14,6 @@ class AdminController extends Controller
      */
     public function index()
     {
-        dd(Helpers::getModels());
         return view('admin.index', [
             'title' => 'Admin',
         ]);

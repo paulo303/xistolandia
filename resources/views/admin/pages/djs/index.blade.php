@@ -18,30 +18,25 @@
             </div>
         </div>
         <div class="card-body">
-            <table class="table table-condensed">
-                <thead>
-                    <tr>
-                        <th class="">Nome</th>
-                        <th class="text-center" width="300">Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($djs as $dj)
+            <div class="table-responsive">
+                <table class="table table-condensed">
+                    <thead>
                         <tr>
-                            <td class="" style="vertical-align: middle;">
-                                {{ $dj->nome }}
-                            </td>
-                            <td class="text-center" style="vertical-align: middle;" class="text-center">
-                                <a href="{{ route('djs.edit', $dj) }}" class="btn btn-outline-info">Editar</a>
-                            </td>
+                            <th class="text-center">Nome</th>
+                            <th class="text-center">Ações</th>
                         </tr>
-                    @empty
-                        <tr>
-                            <td colspan="2" align="center">Nenhum resultado encontrado</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @forelse ($djs as $dj)
+                            @include('admin.pages.djs._partials.table-lista-djs')
+                        @empty
+                            <tr>
+                                <td colspan="2" class="text-center">Nenhum resultado encontrado</td>
+                            </tr>
+                       @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="card-footer">
             {{ $djs->links() }}

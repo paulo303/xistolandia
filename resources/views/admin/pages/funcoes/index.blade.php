@@ -24,18 +24,28 @@
             </div>
         </div>
         <div class="card-body">
-            <table class="table table-condensed">
-                <thead>
-                    <tr>
-                        <th width="">Nome</th>
-                        <th width="">Descrição</th>
-                        <th class="text-center" width="30%">Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @include('admin.pages.funcoes._partials.table-lista-funcoes')
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Nome</th>
+                            <th class="text-center">Descrição</th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($funcoes as $funcao)
+                            @include('admin.pages.funcoes._partials.table-lista-funcoes')
+                        @empty
+                            <tr>
+                                <td colspan="3" class="text-center">Nenhum resultado encontrado</td>
+                            </tr>
+                        @endforelse
+
+
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="card-footer">
             @if (isset($filters))

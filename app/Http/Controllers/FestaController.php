@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\Storage;
 
 class FestaController extends Controller
 {
-    protected Festa $model;
+    protected Festa $festa;
     protected StatusConvidado $statusConvidado;
 
     public function __construct(Festa $festa, StatusConvidado $statusConvidado)
     {
-        $this->model = $festa;
+        $this->festa           = $festa;
         $this->statusConvidado = $statusConvidado;
     }
 
@@ -28,14 +28,15 @@ class FestaController extends Controller
      */
     public function index()
     {
-        $caminhos = [
+        $title = 'Festas';
+        $breadcrumb = [
             ['url' => '/admin', 'titulo' => 'Admin'],
-            ['url' => '', 'titulo' => 'Festas'],
+            ['url' => '',       'titulo' => $title],
         ];
         return view('admin.pages.festas.index', [
-            'title'    => 'Festas',
-            'festas'   => $this->model->getPaginate(),
-            'caminhos' => $caminhos,
+            'title'      => $title,
+            'festas'     => $this->festa->getPaginate(),
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 
@@ -46,14 +47,15 @@ class FestaController extends Controller
      */
     public function create()
     {
-        $caminhos = [
-            ['url' => '/admin', 'titulo' => 'Admin'],
+        $title = 'Nova festa';
+        $breadcrumb = [
+            ['url' => '/admin',        'titulo' => 'Admin'],
             ['url' => '/admin/festas', 'titulo' => 'Festas'],
-            ['url' => '', 'titulo' => 'Nova festa'],
+            ['url' => '',              'titulo' => $title],
         ];
         return view('admin.pages.festas.create', [
-            'title'    => 'Cadastrar nova Festa',
-            'caminhos' => $caminhos,
+            'title'      => $title,
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 
@@ -75,7 +77,7 @@ class FestaController extends Controller
                 $dados['flyer'] = "{$path}/{$upload->getFilename()}";
             }
 
-            $festa = $this->model->create($dados);
+            $this->festa->create($dados);
             DB::commit();
 
             return redirect()->route('festas.index')->with('success', "Festa cadastrada com sucesso!");
@@ -111,12 +113,21 @@ class FestaController extends Controller
      */
     public function edit(Festa $festa)
     {
-        if (!$festa)
+        if (!$festa) {
             return redirect()->back()->withErrors('Não foi possível encontrar a festa!');
+        }
+
+        $title = 'Editar festa';
+        $breadcrumb = [
+            ['url' => '/admin',        'titulo' => 'Admin'],
+            ['url' => '/admin/festas', 'titulo' => 'Festas'],
+            ['url' => '',              'titulo' => $title],
+        ];
 
         return view('admin.pages.festas.edit', [
-            'title' => "Editar Festa",
-            'festa' => $festa,
+            'title'      => $title,
+            'festa'      => $festa,
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 
@@ -129,16 +140,18 @@ class FestaController extends Controller
      */
     public function update(UpdateFestaRequest $request, Festa $festa)
     {
-        if (!$festa)
+        if (!$festa) {
             return redirect()->back()->withErrors('Não foi possível encontrar a festa!');
+        }
 
         DB::beginTransaction();
         try {
             $dados = $request->all();
 
             if ($request->flyer) {
-                if ($festa->image && Storage::exists($festa->image))
+                if ($festa->image && Storage::exists($festa->image)) {
                     Storage::delete($festa->image);
+                }
 
                 $path = 'images/flyers';
                 $upload = $request->flyer->move(public_path($path), $request->data . "." . $request->flyer->getClientOriginalExtension());

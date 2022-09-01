@@ -30,15 +30,21 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th width="">ID</th>
-                            <th width="">Nome</th>
-                            <th width="">E-mail</th>
-                            <th width="">Função</th>
-                            <th class="text-center" width="200">Ações</th>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">Nome</th>
+                            <th class="text-center">E-mail</th>
+                            <th class="text-center">Função</th>
+                            <th class="text-center">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @include('admin.pages.users._partials.table-lista-users')
+                        @forelse ($users as $user)
+                            @include('admin.pages.users._partials.table-lista-users')
+                        @empty
+                            <tr>
+                                <td colspan="5" align="center">Nenhum resultado encontrado</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

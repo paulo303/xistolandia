@@ -10,25 +10,25 @@ use Illuminate\Support\Facades\DB;
 
 class PermissaoController extends Controller
 {
-    protected Permissao $permissoes;
+    protected Permissao $permissao;
 
-    public function __construct(Permissao $permissoes)
+    public function __construct(Permissao $permissao)
     {
-        $this->permissoes = $permissoes;
+        $this->permissao = $permissao;
     }
 
     public function index(Request $request)
     {
         $title = 'Permissões';
-        $caminhos = [
+        $breadcrumb = [
             ['url' => '/admin', 'titulo' => 'Admin'],
             ['url' => '',       'titulo' => $title],
         ];
         return view('admin.pages.permissoes.index', [
             'title'      => $title,
-            'permissoes' => $this->permissoes->getPaginate($request->search),
+            'permissoes' => $this->permissao->getPaginate($request->search),
             'filters'    => $request->all(),
-            'caminhos'   => $caminhos,
+            'breadcrumb'   => $breadcrumb,
         ]);
     }
 
@@ -39,15 +39,15 @@ class PermissaoController extends Controller
      */
     public function create()
     {
-        $title = 'Criar nova permissão';
-        $caminhos = [
+        $title = 'Nova permissão';
+        $breadcrumb = [
             ['url' => '/admin',            'titulo' => 'Admin'],
             ['url' => '/admin/permissoes', 'titulo' => 'Permissões'],
             ['url' => '',                  'titulo' => $title],
         ];
         return view('admin.pages.permissoes.create', [
             'title'    => $title,
-            'caminhos' => $caminhos,
+            'breadcrumb' => $breadcrumb,
         ]);
     }
 
@@ -63,11 +63,10 @@ class PermissaoController extends Controller
         try {
             $data = $request->all();
 
-            $permissoes = $this->permissoes->create($data);
+            $this->permissao->create($data);
             DB::commit();
 
-            $message = "Permissão cadastrada!";
-            return redirect()->route('permissoes.index')->with('success', $message);
+            return redirect()->route('permissoes.index')->with('success', 'Permissão cadastrada!');
 
         } catch (\Throwable $th) {
             DB::rollBack();
@@ -99,7 +98,7 @@ class PermissaoController extends Controller
         }
 
         $title = 'Editar permissão';
-        $caminhos = [
+        $breadcrumb = [
             ['url' => '/admin',            'titulo' => 'Admin'],
             ['url' => '/admin/permissoes', 'titulo' => 'Permissões'],
             ['url' => '',                  'titulo' => $title],
@@ -107,7 +106,7 @@ class PermissaoController extends Controller
         return view('admin.pages.permissoes.edit', [
             'title'     => $title,
             'permissao' => $permissao,
-            'caminhos'  => $caminhos,
+            'breadcrumb'  => $breadcrumb,
         ]);
     }
 
@@ -131,8 +130,7 @@ class PermissaoController extends Controller
             $permissao->update($data);
             DB::commit();
 
-            $message = "Permissão editada!";
-            return redirect()->route('permissoes.index')->with('success', $message);
+            return redirect()->route('permissoes.index')->with('success', 'Permissão editada');
 
         } catch (\Throwable $th) {
             DB::rollBack();

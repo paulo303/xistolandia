@@ -264,11 +264,6 @@ return [
         //     'text' => 'Busca',
         // ],
         [
-            'text'  => 'Festas',
-            'url'   => '/admin/festas',
-            'icon'  => 'fas fa-store',
-        ],
-        [
             'text'  => 'Convidados',
             'url'   => '/admin/convidados',
             'icon'  => 'fas fa-store',
@@ -279,9 +274,9 @@ return [
             'icon'  => 'fas fa-record-vinyl',
         ],
         [
-            'text'  => 'Usuários',
-            'url'   => '/admin/users',
-            'icon'  => 'fas fa-user',
+            'text'  => 'Festas',
+            'url'   => '/admin/festas',
+            'icon'  => 'fas fa-store',
         ],
         [
             'text'  => 'Funções',
@@ -295,6 +290,12 @@ return [
             'icon'  => 'fas fa-user',
             'can'   => 'permissoes-ver',
         ],
+        [
+            'text'  => 'Usuários',
+            'url'   => '/admin/users',
+            'icon'  => 'fas fa-user',
+        ],
+
         // [
         //     'text'  => 'Features',
         //     'url'   => 'admin/features',
