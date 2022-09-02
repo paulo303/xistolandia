@@ -27,19 +27,19 @@
                             <th class="text-center">Flyer</th>
                             <th class="text-center">Data</th>
                             <th class="text-center">Atrações</th>
-                            <th class="text-center">Total</th>
                             <th class="text-center">Convidados</th>
+                            <th class="text-center">Aguardando resposta</th>
                             <th class="text-center">Confirmados</th>
-                            <th class="text-center">Não irão</th>
+                            <th class="text-center">Recusados</th>
                             <th class="text-center">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($festas as $festa)
-                            @include('admin.pages.festas._partials.table-lista-festas')
+                            @include('admin.pages.festas._components.table-lista')
                         @empty
                             <tr>
-                                <td colspan="8" class="text-center">Nenhum resultado encontrado</td>
+                                <td colspan="7" class="text-center">Nenhum resultado encontrado</td>
                             </tr>
                         @endforelse
                     </tbody>

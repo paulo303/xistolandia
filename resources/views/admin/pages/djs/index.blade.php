@@ -28,7 +28,7 @@
                     </thead>
                     <tbody>
                         @forelse ($djs as $dj)
-                            @include('admin.pages.djs._partials.table-lista-djs')
+                            @include('admin.pages.djs._components.table-lista')
                         @empty
                             <tr>
                                 <td colspan="2" class="text-center">Nenhum resultado encontrado</td>

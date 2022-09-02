@@ -39,7 +39,7 @@ class FuncaoController extends Controller
      */
     public function create()
     {
-        $title = 'Editar função';
+        $title = 'Nova função';
         $breadcrumb = [
             ['url' => '/admin',         'titulo' => 'Admin'],
             ['url' => '/admin/funcoes', 'titulo' => 'Funções'],
@@ -98,7 +98,7 @@ class FuncaoController extends Controller
             return redirect()->back()->withErrors('A função não foi encontrada!');
         }
 
-        $title = 'Criar nova função';
+        $title = 'Editar';
         $breadcrumb = [
             ['url' => '/admin',         'titulo' => 'Admin'],
             ['url' => '/admin/funcoes', 'titulo' => 'Funções'],

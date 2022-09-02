@@ -9,6 +9,6 @@
 @section('content')
     <form action="{{ route('djs.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        @include('admin.pages.djs._partials.form')
+        @include('admin.pages.djs._components.form')
     </form>
 @stop

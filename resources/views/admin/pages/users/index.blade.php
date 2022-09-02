@@ -39,7 +39,7 @@
                     </thead>
                     <tbody>
                         @forelse ($users as $user)
-                            @include('admin.pages.users._partials.table-lista-users')
+                            @include('admin.pages.users._components.table-lista')
                         @empty
                             <tr>
                                 <td colspan="5" align="center">Nenhum resultado encontrado</td>

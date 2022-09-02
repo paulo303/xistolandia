@@ -21,6 +21,14 @@ class Convidado extends Model
         'patrocinador' => 'boolean',
     ];
 
+    protected $appends = [
+        'status',
+    ];
+
+    public function getStatusAttribute() {
+        return ConvidadoStatus::find($this->pivot->status_id);
+    }
+
     public function patrocinadores()
     {
         return  $this->where('patrocinador', 1)->get();
@@ -43,10 +51,9 @@ class Convidado extends Model
         ->orderBy('nome', 'asc')
         ->paginate($perPage);
 
-        // $convidados->load([
-        //     // 'convidados',
-        //     // 'lineup',
-        // ]);
+        $convidados->load([
+            'convidados',
+        ]);
 
         return $convidados;
     }

@@ -44,7 +44,7 @@
                     </thead>
                     <tbody>
                         @forelse ($convidados as $convidado)
-                            @include('admin.pages.convidados._partials.table-lista-convidados')
+                            @include('admin.pages.convidados._components.table-lista')
                         @empty
                             <tr>
                                 <td colspan="5" class="text-center">Nenhum resultado encontrado</td>

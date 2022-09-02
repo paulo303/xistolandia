@@ -10,6 +10,6 @@
     <form action="{{ route('permissoes.update', $permissao) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        @include('admin.pages.permissoes._partials.form')
+        @include('admin.pages.permissoes._components.form')
     </form>
 @stop

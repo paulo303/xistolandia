@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             FestaSeeder::class,
             ConvidadoSeeder::class,
-            StatusConvidadoSeeder::class,
+            ConvidadoStatusSeeder::class,
             DjSeeder::class,
         ]);
     }

@@ -9,6 +9,6 @@
 @section('content')
     <form action="{{ route('permissoes.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        @include('admin.pages.permissoes._partials.form')
+        @include('admin.pages.permissoes._components.form')
     </form>
 @stop

@@ -36,7 +36,7 @@ class UserController extends Controller
 
     public function create()
     {
-        $title = 'Criar novo usuário';
+        $title = 'Novo usuário';
         $breadcrumb = [
             ['url' => '/admin',       'titulo' => 'Admin'],
             ['url' => '/admin/users', 'titulo' => 'Usuários'],
@@ -81,16 +81,16 @@ class UserController extends Controller
             return redirect()->back()->withErrors('O usuário não foi encontrado!');
         }
 
-        $title = 'Editar usuário';
+        $title = 'Editar';
         $breadcrumb = [
             ['url' => '/admin',       'titulo' => 'Admin'],
             ['url' => '/admin/users', 'titulo' => 'Usuários'],
             ['url' => '',             'titulo' => $title],
         ];
         return view('admin.pages.users.edit', [
-            'title'    => $title,
-            'funcoes'  => Funcao::all(),
-            'user'     => $user,
+            'title'      => $title,
+            'funcoes'    => Funcao::all(),
+            'user'       => $user,
             'breadcrumb' => $breadcrumb,
         ]);
     }
@@ -123,20 +123,5 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function funcao($id)
-    {
-
-    }
-
-    public function funcaoStore($id)
-    {
-
-    }
-
-    public function funcaoDestroy($id)
-    {
-
     }
 }

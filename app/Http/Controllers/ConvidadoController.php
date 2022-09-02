@@ -100,7 +100,7 @@ class ConvidadoController extends Controller
             return redirect()->back()->withErrors('Não foi possível encontrar o convidado!');
         }
 
-        $title = 'Novo convidado';
+        $title = 'Editar';
         $breadcrumb = [
             ['url' => '/admin',            'titulo' => 'Admin'],
             ['url' => '/admin/convidados', 'titulo' => 'Convidados'],

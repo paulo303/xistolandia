@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StatusConvidado;
+use App\Models\ConvidadoStatus;
 use Illuminate\Http\Request;
 
-class StatusConvidadoController extends Controller
+class ConvidadoStatusController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class StatusConvidadoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\StatusConvidado  $statusConvidado
+     * @param  \App\Models\ConvidadoStatus  $convidadoStatus
      * @return \Illuminate\Http\Response
      */
-    public function show(StatusConvidado $statusConvidado)
+    public function show(ConvidadoStatus $convidadoStatus)
     {
         //
     }
@@ -52,10 +52,10 @@ class StatusConvidadoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\StatusConvidado  $statusConvidado
+     * @param  \App\Models\ConvidadoStatus  $convidadoStatus
      * @return \Illuminate\Http\Response
      */
-    public function edit(StatusConvidado $statusConvidado)
+    public function edit(ConvidadoStatus $convidadoStatus)
     {
         //
     }
@@ -64,10 +64,10 @@ class StatusConvidadoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\StatusConvidado  $statusConvidado
+     * @param  \App\Models\ConvidadoStatus  $convidadoStatus
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, StatusConvidado $statusConvidado)
+    public function update(Request $request, ConvidadoStatus $convidadoStatus)
     {
         //
     }
@@ -75,10 +75,10 @@ class StatusConvidadoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\StatusConvidado  $statusConvidado
+     * @param  \App\Models\ConvidadoStatus  $convidadoStatus
      * @return \Illuminate\Http\Response
      */
-    public function destroy(StatusConvidado $statusConvidado)
+    public function destroy(ConvidadoStatus $convidadoStatus)
     {
         //
     }

@@ -97,7 +97,7 @@ class PermissaoController extends Controller
             return redirect()->back()->withErrors('A permissão não foi encontrada!');
         }
 
-        $title = 'Editar permissão';
+        $title = 'Editar';
         $breadcrumb = [
             ['url' => '/admin',            'titulo' => 'Admin'],
             ['url' => '/admin/permissoes', 'titulo' => 'Permissões'],

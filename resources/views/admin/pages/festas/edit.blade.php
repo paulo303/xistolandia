@@ -10,6 +10,6 @@
     <form action="{{ route('festas.update', $festa) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        @include('admin.pages.festas._partials.form')
+        @include('admin.pages.festas._components.form')
     </form>
 @stop

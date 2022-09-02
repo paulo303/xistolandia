@@ -9,6 +9,6 @@
 @section('content')
     <form action="{{ route('convidados.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        @include('admin.pages.convidados._partials.form')
+        @include('admin.pages.convidados._components.form')
     </form>
 @stop

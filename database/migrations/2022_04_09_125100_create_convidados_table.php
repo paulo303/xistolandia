@@ -22,6 +22,14 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        Schema::create('festa_convidado', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('festa_id')->constrained('festas');
+            $table->foreignId('convidado_id')->constrained('convidados');
+            $table->foreignId('status_id')->constrained('convidados_status');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -31,6 +39,7 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('festa_convidado');
         Schema::dropIfExists('convidados');
     }
 };

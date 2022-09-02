@@ -13,22 +13,22 @@
         {{ $festa->atracoes }}
     </td>
     <td class="text-center" style="vertical-align: middle;">
-        0
+        {{ $festa->total_convidados }}
     </td>
     <td class="text-center" style="vertical-align: middle;">
-        0
+        {{ $festa->total_aguardando_resposta }}
     </td>
     <td class="text-center" style="vertical-align: middle;">
-        0
+        {{ $festa->total_confirmados }}
     </td>
     <td class="text-center" style="vertical-align: middle;">
-        0
+        {{ $festa->total_recusados }}
     </td>
     <td class="text-center" style="vertical-align: middle;">
         @can('update', $festa)
         <a href="{{ route('festas.edit', $festa) }}" class="btn btn-outline-info">Editar</a>
         @endcan
-        <a href="{{ route('festas.show', $festa) }}" class="btn btn-outline-warning">Convidados</a>
+        <a href="{{ route('festas.convidados.index', $festa) }}" class="btn btn-outline-warning">Convidados</a>
         {{-- <a href="{{ route('festas.show', $festa) }}" class="btn btn-outline-warning">Line up</a> --}}
     </td>
 </tr>

@@ -38,7 +38,7 @@
                     </thead>
                     <tbody>
                         @forelse ($permissoes as $permissao)
-                            @include('admin.pages.permissoes._partials.table-lista-permissoes')
+                            @include('admin.pages.permissoes._components.table-lista')
                         @empty
                             <tr>
                                 <td colspan="4" class="text-center">Nenhum resultado encontrado</td>

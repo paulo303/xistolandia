@@ -100,7 +100,7 @@ class DjController extends Controller
             return redirect()->back()->withErrors('Não foi possível encontrar o DJ!');
         }
 
-        $title = 'Editar DJ';
+        $title = 'Editar';
         $breadcrumb = [
             ['url' => '/admin',     'titulo' => 'Admin'],
             ['url' => '/admin/djs', 'titulo' => 'DJs'],

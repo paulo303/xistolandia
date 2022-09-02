@@ -11,8 +11,8 @@
         <div class="col-lg-3 col-6">
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>150</h3>
-                    <p>Total na lista</p>
+                    <h3>{{ $festa->total_convidados }}</h3>
+                    <p>Total de convidados</p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-users"></i>
@@ -26,12 +26,12 @@
         <div class="col-lg-3 col-6">
             <div class="small-box bg-success">
                 <div class="inner">
-                    <h3>100</h3>
+                    <h3>{{ $festa->total_confirmados }}</h3>
                     <p>
-                        70% Confirmados
+                        {{ $festa->porcentagem_confirmados }}% Confirmados
                     </p>
                     <div class="progress" style="height: 3px;">
-                        <div class="progress-bar" style="width: 70%; background-color: white;"></div>
+                        <div class="progress-bar" style="width: {{ $festa->porcentagem_confirmados }}%; background-color: white;"></div>
                     </div>
                 </div>
                 <div class="icon">
@@ -46,12 +46,12 @@
         <div class="col-lg-3 col-6">
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>150</h3>
+                    <h3>{{ $festa->total_aguardando_resposta }}</h3>
                     <p>
-                        70% Convidados
+                        {{ $festa->porcentagem_aguardando_resposta }}% Aguardando resposta
                     </p>
                     <div class="progress" style="height: 3px;">
-                        <div class="progress-bar" style="width: 70%; background-color: white;"></div>
+                        <div class="progress-bar" style="width: {{ $festa->porcentagem_aguardando_resposta }}%; background-color: white;"></div>
                     </div>
                 </div>
                 <div class="icon">
@@ -66,12 +66,12 @@
         <div class="col-lg-3 col-6">
             <div class="small-box bg-danger">
                 <div class="inner">
-                    <h3>50</h3>
+                    <h3>{{ $festa->total_recusados }}</h3>
                     <p>
-                        70% Não vão
+                        {{ $festa->porcentagem_recusados }}% Recusados
                     </p>
                     <div class="progress" style="height: 3px;">
-                        <div class="progress-bar" style="width: 70%; background-color: white;"></div>
+                        <div class="progress-bar" style="width: {{ $festa->porcentagem_recusados }}%; background-color: white;"></div>
                     </div>
                 </div>
                 <div class="icon">
@@ -90,46 +90,37 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <a href="{{ route('festas.create') }}" class="btn btn-success">
+                    <a href="{{ route('festas.convidados.create', $festa) }}" class="btn btn-success">
                         <i class="fa fa-plus"></i> Adicionar convidado
                     </a>
                 </div>
             </div>
         </div>
         <div class="card-body">
-            <table class="table table-condensed">
-                <thead>
-                    <tr>
-                        <th class="text-center">Nome</th>
-                        <th class="text-center">Status</th>
-                        <th class="text-center">Flyer enviado</th>
-                        <th class="text-center" width="300">Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{-- @forelse ($festa->convidados as $convidado)
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td class="text-center" style="vertical-align: middle;">
-                                {{ $convidado->nome }}
-                            </td>
-                            <td class="text-center" style="vertical-align: middle;">
-                                0
-                            </td>
-                            <td class="text-center" style="vertical-align: middle;" class="text-center">
-                                <a href="{{ route('festas.edit', $festa) }}" class="btn btn-outline-info">Alterar Status</a>
-                                <a href="{{ route('festas.show', $festa) }}" class="btn btn-outline-warning">Remover</a>
-                            </td>
+                            <th class="text-center">Nome</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Flyer enviado</th>
+                            <th class="text-center" width="300">Ações</th>
                         </tr>
-                    @empty --}}
-                        <tr>
-                            <td colspan="8" align="center">Nenhum resultado encontrado</td>
-                        </tr>
-                    {{-- @endforelse --}}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @forelse ($festa->convidados as $convidado)
+                            @include('admin.pages.festasConvidados._components.table-lista')
+                        @empty
+                            <tr>
+                                <td colspan="4" align="center">Nenhum resultado encontrado</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="card-footer">
-            {{-- {{ $festas->links() }} --}}
+            {{ $convidados->links() }}
         </div>
     </div>
 @stop

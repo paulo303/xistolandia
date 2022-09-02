@@ -10,6 +10,6 @@
     <form action="{{ route('djs.update', $dj) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        @include('admin.pages.djs._partials.form')
+        @include('admin.pages.djs._components.form')
     </form>
 @stop

@@ -10,6 +10,6 @@
     <form action="{{ route('convidados.update', $convidado) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        @include('admin.pages.convidados._partials.form')
+        @include('admin.pages.convidados._components.form')
     </form>
 @stop

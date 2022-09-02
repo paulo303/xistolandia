@@ -10,6 +10,6 @@
     <form action="{{ route('funcoes.update', $funcao) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        @include('admin.pages.funcoes._partials.form')
+        @include('admin.pages.funcoes._components.form')
     </form>
 @stop

@@ -10,6 +10,7 @@ use App\Http\Controllers\{
     ConvidadoController,
     DjController,
     PermissaoController,
+    FestaConvidadoController,
 };
 
 /*
@@ -40,10 +41,8 @@ Route::middleware('auth')->prefix('admin/')->group(function () {
         'permissoes' => 'permissao'
     ]);
 
-    Route::controller(UserController::class)->prefix('/users/funcao')->group(function () {
-        Route::get('/{id}', 'funcao')->name('users.funcao');
-        Route::post('/{id}', 'funcaoStore')->name('users.funcao.store');
-        Route::delete('/{id}', 'funcaoDestroy')->name('users.funcao.destroy');
+    Route::prefix('/festas/{festa}')->name('festas.')->group(function () {
+        Route::resource('convidados', FestaConvidadoController::class);
     });
 });
 

@@ -5,27 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Festa;
 use App\Http\Requests\Festa\StoreFestaRequest;
 use App\Http\Requests\Festa\UpdateFestaRequest;
-use App\Models\StatusConvidado;
+use App\Models\ConvidadoStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class FestaController extends Controller
 {
-    protected Festa $festa;
-    protected StatusConvidado $statusConvidado;
+    public function __construct(protected Festa $festa, protected ConvidadoStatus $convidadoStatus){}
 
-    public function __construct(Festa $festa, StatusConvidado $statusConvidado)
-    {
-        $this->festa           = $festa;
-        $this->statusConvidado = $statusConvidado;
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $title = 'Festas';
@@ -40,11 +28,6 @@ class FestaController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $title = 'Nova festa';
@@ -59,12 +42,6 @@ class FestaController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreFestaRequest $request)
     {
         DB::beginTransaction();
@@ -88,42 +65,23 @@ class FestaController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Festa  $festa
-     * @return \Illuminate\Http\Response
-     */
     public function show(Festa $festa)
     {
-        if (!$festa)
-            return redirect()->back()->withErrors('Não foi possível encontrar a festa!');
-
-        return view('admin.pages.festas.show', [
-            'title' => "Detalhes",
-            'festa' => $festa,
-        ]);
+        //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Festa  $festa
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Festa $festa)
     {
         if (!$festa) {
             return redirect()->back()->withErrors('Não foi possível encontrar a festa!');
         }
 
-        $title = 'Editar festa';
+        $title = 'Editar';
         $breadcrumb = [
             ['url' => '/admin',        'titulo' => 'Admin'],
             ['url' => '/admin/festas', 'titulo' => 'Festas'],
             ['url' => '',              'titulo' => $title],
         ];
-
         return view('admin.pages.festas.edit', [
             'title'      => $title,
             'festa'      => $festa,
@@ -131,13 +89,6 @@ class FestaController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Festa  $festa
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateFestaRequest $request, Festa $festa)
     {
         if (!$festa) {
@@ -169,12 +120,6 @@ class FestaController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Festa  $festa
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Festa $festa)
     {
         //

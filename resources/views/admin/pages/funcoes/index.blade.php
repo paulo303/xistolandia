@@ -35,7 +35,7 @@
                     </thead>
                     <tbody>
                         @forelse ($funcoes as $funcao)
-                            @include('admin.pages.funcoes._partials.table-lista-funcoes')
+                            @include('admin.pages.funcoes._components.table-lista')
                         @empty
                             <tr>
                                 <td colspan="3" class="text-center">Nenhum resultado encontrado</td>

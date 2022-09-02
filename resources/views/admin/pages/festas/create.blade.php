@@ -9,6 +9,6 @@
 @section('content')
     <form action="{{ route('festas.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        @include('admin.pages.festas._partials.form')
+        @include('admin.pages.festas._components.form')
     </form>
 @stop
