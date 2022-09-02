@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'funcao_id'
     ];
 
     /**
@@ -43,6 +44,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function funcao()
+    {
+        return $this->belongsTo(Funcao::class);
+    }
+
     /*** REGRAS DE NEGÓCIO ***/
     public function getPaginate(string|null $search = '')
     {
@@ -53,6 +59,7 @@ class User extends Authenticatable
             }
         })
         ->orderBy('name', 'asc')
+        ->with(['funcao'])
         ->paginate(10);
 
         return $users;
@@ -60,6 +67,11 @@ class User extends Authenticatable
 
     public function findById($id)
     {
-        return $this->find($id);
+        return $this->with(['funcao'])->find($id);
+    }
+
+    public function isAdmin()
+    {
+        return $this->funcao_id == 1;
     }
 }

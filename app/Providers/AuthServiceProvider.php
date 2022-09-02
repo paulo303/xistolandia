@@ -13,7 +13,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        'App\Models\Festa' => 'App\Policies\FestaPolicy',
+        'App\Models\Funcao' => 'App\Policies\FuncaoPolicy',
+        'App\Models\Permissao' => 'App\Policies\PermissaoPolicy',
     ];
 
     /**
@@ -25,6 +27,16 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::before(function ($user) {
+            return $user->isAdmin();
+        });
+
+        Gate::define('funcoes-ver', function($user) {
+            return $user->isAdmin();
+        });
+
+        Gate::define('permissoes-ver', function($user) {
+            return $user->isAdmin();
+        });
     }
 }

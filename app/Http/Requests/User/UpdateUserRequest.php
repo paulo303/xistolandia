@@ -38,7 +38,7 @@ class UpdateUserRequest extends FormRequest
                 "unique:users,email,{$id},id",
             ],
             'password' => [
-                'required',
+                'nullable',
                 'min:3',
                 'max:255',
             ],

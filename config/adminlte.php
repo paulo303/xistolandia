@@ -189,7 +189,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'dashboard',
+    'dashboard_url' => 'admin',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -264,25 +264,38 @@ return [
         //     'text' => 'Busca',
         // ],
         [
-            'text'  => 'Festas',
-            'url'   => 'festas',
-            'icon'  => 'fas fa-store',
-        ],
-        [
             'text'  => 'Convidados',
-            'url'   => 'convidados',
+            'url'   => '/admin/convidados',
             'icon'  => 'fas fa-store',
         ],
         [
             'text'  => 'DJs',
-            'url'   => 'djs',
+            'url'   => '/admin/djs',
             'icon'  => 'fas fa-record-vinyl',
         ],
         [
+            'text'  => 'Festas',
+            'url'   => '/admin/festas',
+            'icon'  => 'fas fa-store',
+        ],
+        [
+            'text'  => 'Funções',
+            'url'   => '/admin/funcoes',
+            'icon'  => 'fas fa-user',
+            'can'   => 'funcoes-ver',
+        ],
+        [
+            'text'  => 'Permissões',
+            'url'   => '/admin/permissoes',
+            'icon'  => 'fas fa-user',
+            'can'   => 'permissoes-ver',
+        ],
+        [
             'text'  => 'Usuários',
-            'url'   => 'users',
+            'url'   => '/admin/users',
             'icon'  => 'fas fa-user',
         ],
+
         // [
         //     'text'  => 'Features',
         //     'url'   => 'admin/features',
