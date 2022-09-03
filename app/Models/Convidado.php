@@ -51,21 +51,19 @@ class Convidado extends Model
         ->orderBy('nome', 'asc')
         ->paginate($perPage);
 
-        $convidados->load([
-            'convidados',
-        ]);
-
         return $convidados;
     }
 
     public function findById($id)
     {
-        $convidado = $this->find($id);
+        $convidado = $this->find($id)->orderBy('nome', 'asc');
 
-        $convidado->load([
-            // 'convidados',
-            // 'lineup',
-        ]);
+        return $convidado;
+    }
+
+    public function findAll()
+    {
+        $convidado = $this->orderBy('nome', 'asc')->get();
 
         return $convidado;
     }

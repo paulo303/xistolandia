@@ -94,6 +94,12 @@
                         <i class="fa fa-plus"></i> Adicionar convidado
                     </a>
                 </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 right text-right">
+                    <form action="{{ route('festas.convidados.index', $festa) }}" method="get" class="form-inline" style="display: block;">
+                        <input type="text" name="search" id="search" placeholder="Nome" class="form-control" value="{{ $filters['search'] ?? '' }}">
+                        <button type="submit" class="btn btn-dark">Filtrar</button>
+                    </form>
+                </div>
             </div>
         </div>
         <div class="card-body">

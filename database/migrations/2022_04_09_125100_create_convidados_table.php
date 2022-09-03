@@ -27,7 +27,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('festa_id')->constrained('festas');
             $table->foreignId('convidado_id')->constrained('convidados');
-            $table->foreignId('status_id')->constrained('convidados_status');
+            $table->foreignId('status_id')->default(1)->constrained('convidados_status');
             $table->timestamps();
         });
     }
