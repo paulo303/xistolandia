@@ -1,0 +1,20 @@
+.maoe {
+    color: red;
+}
+
+
+
+.select2-container--default .select2-selection--multiple {
+    background-color: #343A40;
+}
+
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #454D55;
+    padding-left: 30px;
+    padding-right: 10px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    padding: 0 6px 0 3px;
+}

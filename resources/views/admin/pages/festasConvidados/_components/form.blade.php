@@ -1,10 +1,10 @@
 <div class="card">
     <div class="card-body">
         <div class="form-row">
-            <div class="col-sm-6 col-md-5 col-lg-4 col-xl-3">
+            <div class="col-12">
                 <div class="form-group">
                     <label class="form-label" for="convidado_id">Convidado</label>
-                    <select class="form-control select2" name="convidado_id">
+                    <select class="form-control select2" name="convidado_id" multiple>
                         @foreach ($convidados as $convidado)
                             <option value="{{ $convidado->id }}">{{ $convidado->nome }}</option>
                         @endforeach

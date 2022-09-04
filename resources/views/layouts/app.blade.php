@@ -80,7 +80,4 @@
         </main>
     </div>
 </body>
-<script>
-    alert('maioe');
-</script>
 </html>
