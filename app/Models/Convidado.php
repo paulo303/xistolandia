@@ -48,7 +48,7 @@ class Convidado extends Model
                 $query->Orwhere('email', 'LIKE', "%{$search}%");
             }
         })
-        ->orderBy('nome', 'asc')
+        ->orderBy('nome')
         ->paginate($perPage);
 
         return $convidados;
@@ -56,14 +56,14 @@ class Convidado extends Model
 
     public function findById($id)
     {
-        $convidado = $this->find($id)->orderBy('nome', 'asc');
+        $convidado = $this->find($id)->orderBy('nome');
 
         return $convidado;
     }
 
     public function findAll()
     {
-        $convidado = $this->orderBy('nome', 'asc')->get();
+        $convidado = $this->orderBy('nome')->get();
 
         return $convidado;
     }

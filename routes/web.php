@@ -43,6 +43,11 @@ Route::middleware('auth')->prefix('admin/')->group(function () {
 
     Route::prefix('/festas/{festa}')->name('festas.')->group(function () {
         Route::resource('convidados', FestaConvidadoController::class);
+        
+        Route::prefix('convidados')->name('convidados.')->group(function () {
+            Route::delete('convidados', [FestaConvidadoController::class, 'removerConvidados'])->name('removerConvidados');
+            Route::post('convidados/busca', [FestaConvidadoController::class, 'buscaConvidados'])->name('buscaConvidados');
+        });
     });
 });
 

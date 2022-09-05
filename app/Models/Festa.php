@@ -33,36 +33,37 @@ class Festa extends Model
     }
 
     public function getTotalConvidadosAttribute() {
-        return count($this->convidados);
+        return $this->convidados ? count($this->convidados) : 0;
+        // return count($this->convidados) ?? 0;
     }
 
     public function getTotalAguardandoRespostaAttribute() {
-        return $this->getConvidadosAguardandoResposta()->count();
+        return $this->getConvidadosAguardandoResposta()->count() ? $this->getConvidadosAguardandoResposta()->count() : 0;
     }
 
     public function getTotalConfirmadosAttribute() {
-        return $this->getConvidadosConfirmados()->count();
+        return $this->getConvidadosConfirmados()->count() ? $this->getConvidadosConfirmados()->count() : 0;
     }
 
     public function getTotalRecusadosAttribute() {
-        return $this->getConvidadosRecusados()->count();
+        return $this->getConvidadosRecusados()->count() ? $this->getConvidadosRecusados()->count() : 0;
     }
 
     public function getPorcentagemAguardandoRespostaAttribute() {
-        return ($this->total_aguardando_resposta * 100) / $this->total_convidados;
+        return $this->total_aguardando_resposta ? ($this->total_aguardando_resposta * 100) / $this->total_convidados : 0;
     }
 
     public function getPorcentagemConfirmadosAttribute() {
-        return ($this->total_confirmados * 100) / $this->total_convidados;
+        return $this->total_confirmados ? ($this->total_confirmados * 100) / $this->total_convidados : 0;
     }
 
     public function getPorcentagemRecusadosAttribute() {
-        return ($this->total_recusados * 100) / $this->total_convidados;
+        return $this->total_recusados ? ($this->total_recusados * 100) / $this->total_convidados : 0;
     }
 
     public function convidados()
     {
-        return $this->belongsToMany(Convidado::class, 'festa_convidado')->withPivot(['status_id'])->withTimestamps();
+        return $this->belongsToMany(Convidado::class, 'festa_convidado')->orderBy('nome')->withPivot(['status_id'])->withTimestamps();
     }
 
     /*** REGRAS DE NEGÓCIO ***/

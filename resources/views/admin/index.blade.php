@@ -3,13 +3,12 @@
 @section('title', $title)
 
 @section('content_header')
-    &nbsp;
-    {{-- @include('admin/_breadcrumb') --}}
+    @include('admin/_logo')
 @stop
 
 @section('content')
     <div class="container-fluid">
-        <div class="row mb-2">
+        {{-- <div class="row mb-2">
             <div class="col-sm-12">
                 <h1>Dashboard</h1>
             </div>
@@ -18,6 +17,6 @@
             <div class="col-sm-12">
                 <p>Informações relevantes virão nesta página.</p>
             </div>
-        </div>
+        </div> --}}
     </div>
 @stop
