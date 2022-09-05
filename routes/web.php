@@ -45,8 +45,8 @@ Route::middleware('auth')->prefix('admin/')->group(function () {
         Route::resource('convidados', FestaConvidadoController::class);
         
         Route::prefix('convidados')->name('convidados.')->group(function () {
-            Route::delete('convidados', [FestaConvidadoController::class, 'removerConvidados'])->name('removerConvidados');
-            Route::post('convidados/busca', [FestaConvidadoController::class, 'buscaConvidados'])->name('buscaConvidados');
+            Route::delete('', [FestaConvidadoController::class, 'removerConvidados'])->name('remover-convidados');
+            Route::post('alterar-status', [FestaConvidadoController::class, 'AlterarStatusConvidados'])->name('alterar-status-convidados');
         });
     });
 });

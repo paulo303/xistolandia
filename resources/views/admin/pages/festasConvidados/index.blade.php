@@ -27,7 +27,7 @@
                     <button type="submit" form="formRemover" class="btn btn-danger btnRemoverConvidado none">
                         <i class="fas fa-trash-alt"></i> Remover selecionados
                     </button>
-                    <button type="button" form="formRemover" class="btn btn-warning btnAlterarStatus none">
+                    <button type="button" form="formRemover" id="btnAlterarStatus" class="btn btn-warning none" data-toggle="modal" data-target="#modalAlterarStatus">
                         <i class="fas fa-info"></i> Alterar status dos selecionados
                     </button>
                 </div>
@@ -51,10 +51,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <form action="{{ route('festas.convidados.removerConvidados', $festa) }}" id="formRemover" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('festas.convidados.remover-convidados', $festa) }}" id="formRemover" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('DELETE')
-                            @forelse ($convidados as $convidado)
+                            @forelse ($festa->convidados as $convidado)
                                 @include('admin.pages.festasConvidados._components.table-lista')
                             @empty
                                 <tr>
@@ -72,6 +72,8 @@
             </button>
         </div>
     </div>
+
+    @include('admin.pages.festasConvidados._components.modal-alterar-status')
 @stop
 
 @section('js')
@@ -84,13 +86,43 @@
             checaSeTemConvidadoSelecionado()
         });
 
+        $(".btnRemoverConvidado").click(function (e) { 
+            e.preventDefault();
+            Swal.fire({
+                title: 'Tem certeza que deseja remover os convidados?',
+                // showDenyButton: true,
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Sim',
+                // denyButtonText: `Não`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    $("#formRemover").submit();
+                }
+            })
+        });
+        
+        $("#btnSalvarAlterarStatus").click(function (e) { 
+            e.preventDefault();
+            var status = $("#formAlterarStatus #status").val();
+            var convidados = [];
+            $('.checkboxConvidados:checked').each(function(i){
+                convidados[i] = $(this).val();
+            });
+            $("#convidados_id").val(convidados);
+
+            $("#formAlterarStatus").submit();
+        });
+        
+
         function checaSeTemConvidadoSelecionado() {
             if ($(".checkboxConvidados").is(':checked')) {
                 $(".btnRemoverConvidado").show();
-                $(".btnAlterarStatus").show();
+                $("#btnAlterarStatus").show();
             } else {
                 $(".btnRemoverConvidado").hide();
-                $(".btnAlterarStatus").hide();
+                $("#btnAlterarStatus").hide();
             }
         }
     </script>
