@@ -50,15 +50,15 @@ class Festa extends Model
     }
 
     public function getPorcentagemAguardandoRespostaAttribute() {
-        return $this->total_aguardando_resposta ? number_format(($this->total_aguardando_resposta * 100) / $this->total_convidados, 2)  : 0;
+        return $this->total_aguardando_resposta ? number_format(($this->total_aguardando_resposta * 100) / $this->total_convidados, 1)  : 0;
     }
 
     public function getPorcentagemConfirmadosAttribute() {
-        return $this->total_confirmados ? number_format(($this->total_confirmados * 100) / $this->total_convidados, 2): 0;
+        return $this->total_confirmados ? number_format(($this->total_confirmados * 100) / $this->total_convidados, 1): 0;
     }
 
     public function getPorcentagemRecusadosAttribute() {
-        return $this->total_recusados ? number_format(($this->total_recusados * 100) / $this->total_convidados, 2) : 0;
+        return $this->total_recusados ? number_format(($this->total_recusados * 100) / $this->total_convidados, 1) : 0;
     }
 
     public function convidados()
